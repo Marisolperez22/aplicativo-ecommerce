@@ -1,0 +1,32 @@
+name: ecommerce
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_svg: ^2.2.0
+  atomic_design_system:
+    git:
+      url: https://github.com/Marisolperez22/atomic_desing_system.git
+      path: atomic_design_system
+  fake_store_get_request:
+    git:
+      url: https://github.com/Marisolperez22/fake_store_get_request
+  flutter_riverpod: ^2.6.1
+  go_router: ^16.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
