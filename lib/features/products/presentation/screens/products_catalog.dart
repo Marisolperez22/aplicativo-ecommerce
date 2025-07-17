@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../providers/catalog_notifier.dart';
+import '../widgets/product_card.dart';
 
 class ProductsCatalog extends ConsumerWidget {
   const ProductsCatalog({super.key});
@@ -99,13 +100,7 @@ class ProductsCatalog extends ConsumerWidget {
       itemCount: products.length,
       itemBuilder: (context, index) {
         final product = products[index];
-        return ProductCard(
-          productName: product.title ?? '',
-          price: product.price.toString(),
-          rating: '5',
-          favoriteOnPressed: () {},
-          imageUrl: product.image ?? '',
-        );
+        return CardProduct(product: product);
       },
     );
   }

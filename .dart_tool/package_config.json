@@ -9,7 +9,7 @@
     },
     {
       "name": "analyzer",
-      "rootUri": "file:///Users/marisolperez/.pub-cache/hosted/pub.dev/analyzer-7.5.7",
+      "rootUri": "file:///Users/marisolperez/.pub-cache/hosted/pub.dev/analyzer-7.5.9",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     },
@@ -27,7 +27,7 @@
     },
     {
       "name": "atomic_design_system",
-      "rootUri": "file:///Users/marisolperez/.pub-cache/git/atomic_desing_system-b817b75e31bd4d5eabb44c5306ead7c73857eed5/atomic_design_system",
+      "rootUri": "file:///Users/marisolperez/.pub-cache/git/atomic_desing_system-e916357a100e5d1c8654595cee1f1edbfa4a92b8/atomic_design_system",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     },
@@ -141,7 +141,13 @@
     },
     {
       "name": "fake_store_get_request",
-      "rootUri": "file:///Users/marisolperez/.pub-cache/git/fake_store_get_request-d1204b63cd77ab8527f37b087597352a0eca242f/",
+      "rootUri": "file:///Users/marisolperez/.pub-cache/git/fake_store_get_request-f4183d73064326eaa90e7b4a50e29a5ca006bc9e/",
+      "packageUri": "lib/",
+      "languageVersion": "3.7"
+    },
+    {
+      "name": "ffi",
+      "rootUri": "file:///Users/marisolperez/.pub-cache/hosted/pub.dev/ffi-2.1.4",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     },
@@ -332,10 +338,40 @@
       "languageVersion": "3.3"
     },
     {
+      "name": "path_provider_linux",
+      "rootUri": "file:///Users/marisolperez/.pub-cache/hosted/pub.dev/path_provider_linux-2.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
+      "name": "path_provider_platform_interface",
+      "rootUri": "file:///Users/marisolperez/.pub-cache/hosted/pub.dev/path_provider_platform_interface-2.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "path_provider_windows",
+      "rootUri": "file:///Users/marisolperez/.pub-cache/hosted/pub.dev/path_provider_windows-2.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
       "name": "petitparser",
       "rootUri": "file:///Users/marisolperez/.pub-cache/hosted/pub.dev/petitparser-6.1.0",
       "packageUri": "lib/",
       "languageVersion": "3.5"
+    },
+    {
+      "name": "platform",
+      "rootUri": "file:///Users/marisolperez/.pub-cache/hosted/pub.dev/platform-3.1.6",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "plugin_platform_interface",
+      "rootUri": "file:///Users/marisolperez/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.8",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
     },
     {
       "name": "pool",
@@ -360,6 +396,48 @@
       "rootUri": "file:///Users/marisolperez/.pub-cache/hosted/pub.dev/riverpod-2.6.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "shared_preferences",
+      "rootUri": "file:///Users/marisolperez/.pub-cache/hosted/pub.dev/shared_preferences-2.5.3",
+      "packageUri": "lib/",
+      "languageVersion": "3.5"
+    },
+    {
+      "name": "shared_preferences_android",
+      "rootUri": "file:///Users/marisolperez/.pub-cache/hosted/pub.dev/shared_preferences_android-2.4.10",
+      "packageUri": "lib/",
+      "languageVersion": "3.6"
+    },
+    {
+      "name": "shared_preferences_foundation",
+      "rootUri": "file:///Users/marisolperez/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.5.4",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
+      "name": "shared_preferences_linux",
+      "rootUri": "file:///Users/marisolperez/.pub-cache/hosted/pub.dev/shared_preferences_linux-2.4.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
+    },
+    {
+      "name": "shared_preferences_platform_interface",
+      "rootUri": "file:///Users/marisolperez/.pub-cache/hosted/pub.dev/shared_preferences_platform_interface-2.4.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "shared_preferences_web",
+      "rootUri": "file:///Users/marisolperez/.pub-cache/hosted/pub.dev/shared_preferences_web-2.4.3",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
+      "name": "shared_preferences_windows",
+      "rootUri": "file:///Users/marisolperez/.pub-cache/hosted/pub.dev/shared_preferences_windows-2.4.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
     },
     {
       "name": "shelf",
@@ -500,6 +578,12 @@
       "languageVersion": "3.3"
     },
     {
+      "name": "xdg_directories",
+      "rootUri": "file:///Users/marisolperez/.pub-cache/hosted/pub.dev/xdg_directories-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
+    },
+    {
       "name": "xml",
       "rootUri": "file:///Users/marisolperez/.pub-cache/hosted/pub.dev/xml-6.5.0",
       "packageUri": "lib/",
@@ -518,7 +602,7 @@
       "languageVersion": "3.7"
     }
   ],
-  "generated": "2025-07-13T22:59:18.613233Z",
+  "generated": "2025-07-16T12:34:54.638089Z",
   "generator": "pub",
   "generatorVersion": "3.7.2",
   "flutterRoot": "file:///Users/marisolperez/Flutter/flutter",

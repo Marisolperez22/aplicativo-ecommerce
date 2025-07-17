@@ -1,17 +1,34 @@
-// features/auth/presentation/screens/login_page.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:atomic_design_system/atoms/buttons/primary_button.dart';
 
 import '../providers/auth_notifier.dart';
+import '../widgets/custom_text_field.dart';
+import '../../../../core/utils/utils.dart';
+import '../../../../core/widgets/error_message.dart';
 
-class LoginPage extends ConsumerWidget {
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
+  ConsumerState<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends ConsumerState<LoginPage> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final authState = ref.watch(authNotifierProvider);
 
     return Scaffold(
@@ -23,114 +40,82 @@ class LoginPage extends ConsumerWidget {
             child: Container(
               decoration: const BoxDecoration(
                 color: Color.fromARGB(247, 255, 255, 255),
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(40)),
-              ),
-              width: double.infinity,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20.0,
-                  vertical: 40,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(50),
+                  topRight: Radius.circular(50),
                 ),
-                child: Column(
-                  children: [
-                    const Text('Login', style: TextStyle(fontSize: 36)),
-                    const SizedBox(height: 40),
-                    TextField(
-                      controller: emailController,
-                      decoration: InputDecoration(
-                        filled: true,
-                        labelText: 'Email',
-                        fillColor: Colors.white,
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(color: Colors.transparent),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(color: Colors.transparent),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      const Text(
+                        'Login',
+                        style: TextStyle(
+                          fontSize: 36,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 20),
-                    TextField(
-                      controller: passwordController,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        filled: true,
-                        hintText: 'Password',
-                        fillColor: Colors.white,
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(color: Colors.transparent),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(color: Colors.transparent),
-                        ),
+                      const SizedBox(height: 40),
+                      CustomTextField(
+                        label: 'Nombre de usuario',
+                        controller: emailController,
+                        validator: (email) => Utils.validateInput(email),
+                        hasSuffixIcon: false,
                       ),
-                    ),
-                    if (authState is AuthError)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 16.0),
-                        child: Text(
-                          authState.message,
-                          style: const TextStyle(color: Colors.red),
-                        ),
-                      ),
-                    const SizedBox(height: 60),
-                    InkWell(
-                      onTap: () {
-                        if (emailController.text.isNotEmpty &&
-                            passwordController.text.isNotEmpty) {
-                          ref
-                              .read(authNotifierProvider.notifier)
-                              .login(
-                                emailController.text,
-                                passwordController.text,
-                              );
-                        }
+                      const SizedBox(height: 20),
 
-                        if (ref.read(authNotifierProvider)
-                            is AuthAuthenticated) {
-                          if (context.mounted) {
-                            context.goNamed('home');
-                          }
-                        }
-                      },
-                      child: Row(
+                      CustomTextField(
+                        label: 'Contraseña',
+                        controller: passwordController,
+                        validator: (password) => Utils.validateInput(password),
+                        hasSuffixIcon: true,
+                      ),
+                      if (authState is AuthError)
+                        ErrorMessage(message: authState.message),
+                      const SizedBox(height: 40),
+                      Row(
                         children: [
                           Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 40.0,
-                                  vertical: 15.0,
-                                ),
-                                child: Center(
-                                  child:
-                                      authState is AuthLoading
-                                          ? const CircularProgressIndicator(
-                                            color: Colors.white,
-                                          )
-                                          : const Text(
-                                            'Login',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 16,
-                                            ),
-                                          ),
-                                ),
-                              ),
+                            child: PrimaryButton(
+                              text: 'Login',
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  ref
+                                      .read(authNotifierProvider.notifier)
+                                      .login(
+                                        emailController.text,
+                                        passwordController.text,
+                                      );
+                                }
+
+                                if (ref.read(authNotifierProvider)
+                                    is AuthAuthenticated) {
+                                  if (context.mounted) {
+                                    context.goNamed('home');
+                                  }
+                                }
+                              },
                             ),
                           ),
                         ],
                       ),
-                    ),
-                  ],
+                      SizedBox(height: 20),
+                     
+                      Row(
+                        children: [
+                          Expanded(
+                            child: PrimaryButton(
+                              text: 'Registrarse',
+                              onPressed: () => context.pushNamed('register'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

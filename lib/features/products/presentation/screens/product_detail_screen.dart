@@ -3,6 +3,8 @@ import 'package:fake_store_get_request/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../providers/cart_notifier.dart';
+
 class ProductDetailScreen extends ConsumerWidget {
   final String productId;
 
@@ -17,23 +19,25 @@ class ProductDetailScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Detalle del Producto')),
-      body: _buildBody(productState),
+      body: _buildBody(productState, context, ref),
     );
+
+    
   }
 
-  Widget _buildBody(ProductDetailState state) {
+  Widget _buildBody(ProductDetailState state, BuildContext context, WidgetRef ref) {
     if (state is ProductDetailLoading) {
       return const Center(child: CircularProgressIndicator());
     } else if (state is ProductDetailError) {
       return Center(child: Text(state.message));
     } else if (state is ProductDetailLoaded) {
-      return _buildProductDetail(state.product);
+      return _buildProductDetail(state.product, context, ref);
     } else {
       return const Center(child: Text('Estado desconocido'));
     }
   }
 
-  Widget _buildProductDetail(Product product) {
+  Widget _buildProductDetail(Product product, BuildContext context, WidgetRef ref) {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -63,13 +67,24 @@ class ProductDetailScreen extends ConsumerWidget {
        
           
           // Descripción
-          Text(
-            'Descripción:',
-          ),
-          const SizedBox(height: 8),
+          
           Text(product.description ?? 'Sin descripción disponible'),
+          const SizedBox(height: 40),
+
+
+
+          Center(child: ElevatedButton(onPressed: (){
+             ref.read(cartNotifierProvider.notifier).addProduct(product);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('${product.title} añadido al carrito'),
+                    ),
+                  );
+          }, child: Text('Agregar al carrito')))
         ],
       ),
     );
   }
+
+  
 }

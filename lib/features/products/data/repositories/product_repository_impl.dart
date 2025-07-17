@@ -1,3 +1,4 @@
+import 'package:fake_store_get_request/models/cart.dart';
 import 'package:fake_store_get_request/models/product.dart';
 import 'package:fake_store_get_request/services/fake_store_service.dart';
 
@@ -43,4 +44,15 @@ class ProductRepositoryImpl implements ProductRepository {
       throw Exception('Loading products by category failed: $e');
     }
   }
+
+    @override
+  Future<List<Cart>> getUserCart(int idUser) async {
+    try {
+      return await remoteDataSource.getUserCart(idUser);
+    } catch (e) {
+      throw Exception('Error getting user cart: $e');
+    }
+  }
+
+  
 }

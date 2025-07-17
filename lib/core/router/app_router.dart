@@ -1,4 +1,5 @@
 // app_router.dart
+import 'package:ecommerce/features/products/presentation/screens/cart_screen.dart';
 import 'package:ecommerce/features/products/presentation/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../features/auth/presentation/screens/login_page.dart';
 import '../../features/auth/presentation/providers/auth_notifier.dart';
+import '../../features/auth/presentation/screens/register_page.dart';
 import '../../features/products/presentation/screens/home_screen.dart';
 import '../../features/products/presentation/screens/product_detail_screen.dart';
 import '../../features/products/presentation/screens/products_catalog.dart';
@@ -65,6 +67,18 @@ final routerProvider = Provider<GoRouter>((ref) {
         name: 'catalog',
         builder: (context, state) => const ProductsCatalog(),
       ),
+      GoRoute(
+        path: '/cart',
+        name: 'cart',
+        builder: (context, state) => const CartScreen(),
+      ),
+GoRoute(
+        path: '/register',
+        name: 'register',
+        builder: (context, state) => const RegisterPage(),
+      ),
+
+      
     ],
     redirect: (BuildContext context, GoRouterState state) {
       if (authState is AuthAuthenticated && state.uri.path == '/login') {

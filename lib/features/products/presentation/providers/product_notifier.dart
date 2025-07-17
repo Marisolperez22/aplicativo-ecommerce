@@ -70,6 +70,8 @@ class ProductNotifier extends StateNotifier<ProductState> {
       state = ProductError(e.toString());
     }
   }
+
+
 }
 
 @immutable
