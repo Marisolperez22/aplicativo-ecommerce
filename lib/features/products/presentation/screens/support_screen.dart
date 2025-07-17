@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SupportScreen extends ConsumerWidget {
@@ -60,7 +59,6 @@ class SupportScreen extends ConsumerWidget {
               title: 'Correo electrónico',
               subtitle: 'Envíanos un mensaje directamente',
               value: 'soporte@fakestore.com',
-              onTap: () => _launchEmail(),
             ),
             const SizedBox(height: 12),
             _buildContactCard(
@@ -69,7 +67,6 @@ class SupportScreen extends ConsumerWidget {
               title: 'Teléfono',
               subtitle: 'Horario: L-V 9:00 a 18:00',
               value: '+1 234 567 890',
-              onTap: () => _launchPhoneCall('+1234567890'),
             ),
             const SizedBox(height: 12),
             _buildContactCard(
@@ -78,7 +75,6 @@ class SupportScreen extends ConsumerWidget {
               title: 'Oficinas',
               subtitle: 'Visítanos en nuestras instalaciones',
               value: 'Calle Falsa 123, Ciudad',
-              onTap: () => _launchMaps('Calle+Falsa+123,+Ciudad'),
             ),
             const SizedBox(height: 32),
 
@@ -105,28 +101,9 @@ class SupportScreen extends ConsumerWidget {
               question: '¿Cuánto tarda el envío?',
               answer: 'El envío estándar tarda 3-5 días hábiles. Ofrecemos opción express (24h) con costo adicional.',
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 10),
 
-            // Botón de ayuda adicional
-            Center(
-              child: ElevatedButton.icon(
-                icon: const Icon(Icons.chat),
-                label: const Text('Chat en vivo'),
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                onPressed: () {
-                  // Implementar chat en vivo
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Conectando con nuestro equipo...')),
-                  );
-                },
-              ),
-            ),
-            const SizedBox(height: 40),
+           
           ],
         ),
       ),
@@ -139,7 +116,6 @@ class SupportScreen extends ConsumerWidget {
     required String title,
     required String subtitle,
     required String value,
-    required VoidCallback onTap,
   }) {
     return Card(
       elevation: 0,
@@ -149,42 +125,37 @@ class SupportScreen extends ConsumerWidget {
           color: Theme.of(context).dividerColor.withOpacity(0.2),
         ),
       ),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(12),
-        onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(icon, color: Theme.of(context).colorScheme.primary),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                shape: BoxShape.circle,
               ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(title, style: Theme.of(context).textTheme.titleMedium),
-                    Text(subtitle, style: Theme.of(context).textTheme.bodySmall),
-                    const SizedBox(height: 4),
-                    Text(
-                      value,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Theme.of(context).colorScheme.primary,
-                            fontWeight: FontWeight.bold,
-                          ),
-                    ),
-                  ],
-                ),
+              child: Icon(icon, color: Theme.of(context).colorScheme.primary),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title, style: Theme.of(context).textTheme.titleMedium),
+                  Text(subtitle, style: Theme.of(context).textTheme.bodySmall),
+                  const SizedBox(height: 4),
+                  Text(
+                    value,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                ],
               ),
-              const Icon(Icons.chevron_right),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -205,30 +176,5 @@ class SupportScreen extends ConsumerWidget {
     );
   }
 
-  Future<void> _launchEmail() async {
-    final Uri emailLaunchUri = Uri(
-      scheme: 'mailto',
-      path: 'soporte@fakestore.com',
-      queryParameters: {'subject': 'Soporte FakeStore'},
-    );
 
-   
-  }
-
-  Future<void> _launchPhoneCall(String phoneNumber) async {
-    final Uri phoneLaunchUri = Uri(scheme: 'tel', path: phoneNumber);
-
-  
-  }
-
-  Future<void> _launchMaps(String address) async {
-    final Uri mapsLaunchUri = Uri(
-      scheme: 'https',
-      host: 'www.google.com',
-      path: '/maps/search/',
-      queryParameters: {'api': '1', 'query': address},
-    );
-
-   
-  }
 }

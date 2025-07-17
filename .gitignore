@@ -1,6 +1,9 @@
+# Flutter
 /build/
-ios/Flutter/Flutter.framework
-ios/Flutter/Flutter.podspec
-# Archivos de compilación de iOS
-/build/ios/
+/.dart_tool/
+/.flutter-plugins
+/.flutter-plugins-dependencies
+/.metadata
+.packages
 *.dSYM
+*.symbols
