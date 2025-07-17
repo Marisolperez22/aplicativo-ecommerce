@@ -9,7 +9,7 @@
     },
     {
       "name": "analyzer",
-      "rootUri": "file:///Users/marisolperez/.pub-cache/hosted/pub.dev/analyzer-7.5.9",
+      "rootUri": "file:///Users/marisolperez/.pub-cache/hosted/pub.dev/analyzer-7.7.0",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     },
@@ -27,7 +27,7 @@
     },
     {
       "name": "atomic_design_system",
-      "rootUri": "file:///Users/marisolperez/.pub-cache/git/atomic_desing_system-e916357a100e5d1c8654595cee1f1edbfa4a92b8/atomic_design_system",
+      "rootUri": "file:///Users/marisolperez/.pub-cache/git/atomic_desing_system-accfa4147ce296b7c7e510176ad99080de3ef811/atomic_design_system",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     },
@@ -141,7 +141,7 @@
     },
     {
       "name": "fake_store_get_request",
-      "rootUri": "file:///Users/marisolperez/.pub-cache/git/fake_store_get_request-f4183d73064326eaa90e7b4a50e29a5ca006bc9e/",
+      "rootUri": "file:///Users/marisolperez/.pub-cache/git/fake_store_get_request-e776b8eb02ef61c1c0a13d7b4a2fdeef73b43fd0/",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     },
@@ -602,7 +602,7 @@
       "languageVersion": "3.7"
     }
   ],
-  "generated": "2025-07-16T12:34:54.638089Z",
+  "generated": "2025-07-17T02:14:55.173977Z",
   "generator": "pub",
   "generatorVersion": "3.7.2",
   "flutterRoot": "file:///Users/marisolperez/Flutter/flutter",

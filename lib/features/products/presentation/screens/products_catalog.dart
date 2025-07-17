@@ -1,4 +1,3 @@
-import 'package:atomic_design_system/atomic_design_system.dart';
 import 'package:fake_store_get_request/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

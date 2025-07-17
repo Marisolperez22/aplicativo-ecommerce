@@ -1,9 +1,9 @@
+import 'package:atomic_design_system/atomic_design_system.dart';
 import 'package:fake_store_get_request/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../providers/cart_notifier.dart';
 
 class CardProduct extends ConsumerWidget {
   final Product product;
@@ -38,16 +38,23 @@ class CardProduct extends ConsumerWidget {
                 ),
               ),
               // Texto
-              Text(
-                product.title ?? '',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+              Padding(
+                
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                child: Text(
+                  product.title ?? '',
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AtomicSystemColorsFoundation.primaryColor.withAlpha(150)),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: true,
+                ),
               ),
               // Fila con precio e icono
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '\$ ${product.price.toString()}',
+                    '\$${product.price.toString()}',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Row(
@@ -55,7 +62,7 @@ class CardProduct extends ConsumerWidget {
                       const Icon(Icons.star, color: Colors.amber, size: 16),
                       const SizedBox(width: 4),
                       Text(
-                        product.id.toString(),
+                        (product.rating?.rate ?? 0).toString(),
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
@@ -94,7 +101,6 @@ class CardProduct extends ConsumerWidget {
           ),
         ),
       ),
-
     );
   }
 }

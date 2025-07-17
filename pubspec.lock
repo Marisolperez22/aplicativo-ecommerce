@@ -13,10 +13,10 @@ packages:
     dependency: transitive
     description:
       name: analyzer
-      sha256: "754aed101003afceca3e6637fe88150dbe9739068e0135788a62645a131867bb"
+      sha256: b1ade5707ab7a90dfd519eaac78a7184341d19adb6096c68d499b59c7c6cf880
       url: "https://pub.dev"
     source: hosted
-    version: "7.5.9"
+    version: "7.7.0"
   args:
     dependency: transitive
     description:
@@ -38,7 +38,7 @@ packages:
     description:
       path: atomic_design_system
       ref: HEAD
-      resolved-ref: e916357a100e5d1c8654595cee1f1edbfa4a92b8
+      resolved-ref: accfa4147ce296b7c7e510176ad99080de3ef811
       url: "https://github.com/Marisolperez22/atomic_desing_system.git"
     source: git
     version: "0.0.1"
@@ -191,7 +191,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: f4183d73064326eaa90e7b4a50e29a5ca006bc9e
+      resolved-ref: e776b8eb02ef61c1c0a13d7b4a2fdeef73b43fd0
       url: "https://github.com/Marisolperez22/fake_store_get_request"
     source: git
     version: "0.0.2"

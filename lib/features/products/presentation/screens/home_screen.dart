@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fake_store_get_request/models/product.dart';
 import 'package:atomic_design_system/atomic_design_system.dart';
 
-import '../../../../core/utils/local_storage_service.dart';
 import '../widgets/product_list_item.dart';
 import '../providers/product_notifier.dart';
 import '../../../auth/presentation/providers/auth_notifier.dart';
@@ -21,7 +20,7 @@ class HomeScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: CustomAppBar(
-        appBarColor: const Color.fromARGB(255, 209, 212, 214),
+        appBarColor: const Color.fromARGB(255, 235, 237, 237),
         title: 'Fake Store',
         rightIconOnPressed: () {
           ref.read(authNotifierProvider.notifier).logout();
@@ -39,7 +38,7 @@ class HomeScreen extends ConsumerWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  const Color.fromARGB(255, 209, 212, 214),
+                  const Color.fromARGB(255, 235, 237, 237),
                   const Color.fromARGB(255, 255, 255, 255),
                 ],
               ),
