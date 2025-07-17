@@ -1,7 +1,7 @@
 class Utils {
   static String? validateInput(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Por favor ingrese su contraseña';
+      return 'Por favor ingrese un valor';
     }
 
     return null;

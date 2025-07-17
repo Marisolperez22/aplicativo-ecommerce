@@ -11,6 +11,7 @@ import '../../features/auth/presentation/screens/register_page.dart';
 import '../../features/products/presentation/screens/home_screen.dart';
 import '../../features/products/presentation/screens/product_detail_screen.dart';
 import '../../features/products/presentation/screens/products_catalog.dart';
+import '../../features/products/presentation/screens/support_screen.dart';
 
 final _routerAuthNotifier = Provider((ref) {
   final auth = ref.watch(authNotifierProvider.notifier);
@@ -72,13 +73,17 @@ final routerProvider = Provider<GoRouter>((ref) {
         name: 'cart',
         builder: (context, state) => const CartScreen(),
       ),
-GoRoute(
+      GoRoute(
         path: '/register',
         name: 'register',
         builder: (context, state) => const RegisterPage(),
       ),
 
-      
+      GoRoute(
+        path: '/support',
+        name: 'support',
+        builder: (context, state) => const SupportScreen(),
+      ),
     ],
     redirect: (BuildContext context, GoRouterState state) {
       if (authState is AuthAuthenticated && state.uri.path == '/login') {

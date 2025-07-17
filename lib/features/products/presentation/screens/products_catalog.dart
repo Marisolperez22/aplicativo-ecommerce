@@ -1,3 +1,4 @@
+import 'package:atomic_design_system/atoms/buttons/primary_button.dart';
 import 'package:fake_store_get_request/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,97 +11,163 @@ class ProductsCatalog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final catalogState = ref.watch(catalogRepositoryProvider);
+    final categoriesAsync = ref.watch(categoriesProvider);
+    final productsAsync = ref.watch(productsByCategoryProvider);
+    final selectedCategory = ref.watch(selectedCategoryProvider); // Nuevo provider para categoría seleccionada
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Categorías')),
-      body: Column(
-        children: [
-          _buildCategories(catalogState, ref),
-          Expanded(child: _buildProducts(catalogState)),
-        ],
+      appBar: AppBar(
+        title: const Text('Catálogo de Productos', style: TextStyle(fontWeight: FontWeight.bold)),
+        centerTitle: true,
+        elevation: 0,
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Theme.of(context).colorScheme.primary.withOpacity(0.05),
+              Theme.of(context).colorScheme.surface,
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            _buildCategories(categoriesAsync, ref, selectedCategory),
+            const SizedBox(height: 8),
+            _buildCategoryTitle(selectedCategory),
+            const SizedBox(height: 8),
+            Expanded(child: _buildProducts(productsAsync)),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildCategories(CatalogState state, WidgetRef ref) {
-    if (state is! CatalogLoaded || state.categories.isEmpty) {
-      return const SizedBox(
-        height: 110,
-        child: Center(child: CircularProgressIndicator()),
-      );
-    } else {
-      return SizedBox(
-        height: 110,
-        child: _buildProductCategories(state.categories, ref),
-      );
-    }
+  Widget _buildCategories(
+    AsyncValue<List<String>> categoriesAsync,
+    WidgetRef ref,
+    String? selectedCategory,
+  ) {
+    return SizedBox(
+      height: 80,
+      child: categoriesAsync.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, stack) => Center(child: Text('Error: $error', style: TextStyle(color: Colors.red))),
+        data: (categories) => _buildProductCategories(categories, ref, selectedCategory),
+      ),
+    );
   }
 
-  Widget _buildProductCategories(List<String> categories, WidgetRef ref) {
+  Widget _buildProductCategories(List<String> categories, WidgetRef ref, String? selectedCategory) {
     return ListView.separated(
       scrollDirection: Axis.horizontal,
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       itemCount: categories.length,
-      separatorBuilder: (context, index) {
-        return const SizedBox(width: 20);
-      },
+      separatorBuilder: (context, index) => const SizedBox(width: 12),
       itemBuilder: (context, index) {
         final category = categories[index];
-        return InkWell(
-          onTap: () {
-            ref
-                .read(catalogRepositoryProvider.notifier)
-                .getProductsByCategory(category);
-          },
-          child: Container(
-            padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Text(
-              _formatCategoryName(category),
-              style: const TextStyle(fontSize: 18, color: Colors.white),
+        final isSelected = category == selectedCategory;
+        
+        return ChoiceChip(
+          label: Text(
+            _formatCategoryName(category),
+            style: TextStyle(
+              color: isSelected ? Colors.white : Theme.of(context).primaryColor,
+              fontWeight: FontWeight.w500,
             ),
           ),
+          selected: isSelected,
+          onSelected: (_) {
+            ref.read(selectedCategoryProvider.notifier).state = category;
+            ref.read(productsByCategoryProvider.notifier).getProductsByCategory(category);
+          },
+          backgroundColor: Colors.transparent,
+          selectedColor: Theme.of(context).primaryColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: BorderSide(
+              color: isSelected 
+                  ? Theme.of(context).primaryColor 
+                  : Colors.grey.shade300,
+            ),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         );
       },
     );
   }
 
-  Widget _buildProducts(CatalogState state) {
-    if (state is CatalogInitial) {
-      return const Center(child: Text('Selecciona una categoría'));
-    } else if (state is CatalogLoading) {
-      return const Center(child: CircularProgressIndicator());
-    } else if (state is CatalogError) {
-      return Center(child: Text('Error: ${state.message}'));
-    } else if (state is CatalogLoaded) {
-      return _buildProductList(state.products);
-    } else {
-      return const Center(child: Text('Estado desconocido'));
-    }
+  Widget _buildCategoryTitle(String? selectedCategory) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          selectedCategory != null 
+              ? _formatCategoryName(selectedCategory)
+              : 'Todos los productos',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.grey.shade800,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildProducts(AsyncValue<List<Product>> productsAsync) {
+    return productsAsync.when(
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stack) => Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.error_outline, color: Colors.red, size: 48),
+            const SizedBox(height: 16),
+            Text('Error al cargar productos', style: TextStyle(fontSize: 18)),
+            Text('$error', style: TextStyle(color: Colors.grey)),
+          ],
+        ),
+      ),
+      data: (products) => _buildProductList(products),
+    );
   }
 
   Widget _buildProductList(List<Product> products) {
     if (products.isEmpty) {
-      return const Center(child: Text('No hay productos en esta categoría'));
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.search_off, size: 48, color: Colors.grey.shade400),
+            const SizedBox(height: 16),
+            Text(
+              'No hay productos en esta categoría',
+              style: TextStyle(fontSize: 18, color: Colors.grey.shade600),
+            ),
+          ],
+        ),
+      );
     }
 
-    return GridView.builder(
-      padding: const EdgeInsets.all(8),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 0.7,
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 8,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 0.75,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+        ),
+        itemCount: products.length,
+        itemBuilder: (context, index) {
+          final product = products[index];
+          return CardProduct(product: product);
+        },
       ),
-      itemCount: products.length,
-      itemBuilder: (context, index) {
-        final product = products[index];
-        return CardProduct(product: product);
-      },
     );
   }
 
@@ -109,9 +176,13 @@ class ProductsCatalog extends ConsumerWidget {
         .replaceAll("'s", "'s ")
         .split(' ')
         .map(
-          (word) =>
-              word.isNotEmpty ? word[0].toUpperCase() + word.substring(1) : '',
+          (word) => word.isNotEmpty 
+              ? word[0].toUpperCase() + word.substring(1).toLowerCase()
+              : '',
         )
         .join(' ');
   }
 }
+
+// Añade este provider en tu archivo de providers
+final selectedCategoryProvider = StateProvider<String?>((ref) => null);

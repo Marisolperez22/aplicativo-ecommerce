@@ -1,0 +1,1 @@
+ /Users/marisolperez/Documents/Proyectos\ Flutter/aplicativo-ecommerce/.dart_tool/flutter_build/af3c4d0c0df1ee7974d7f67a404ea0c3/native_assets.json: 

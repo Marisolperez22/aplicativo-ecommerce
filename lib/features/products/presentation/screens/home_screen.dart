@@ -23,11 +23,10 @@ class HomeScreen extends ConsumerWidget {
         appBarColor: const Color.fromARGB(255, 235, 237, 237),
         title: 'Fake Store',
         rightIconOnPressed: () {
-          ref.read(authNotifierProvider.notifier).logout();
-          context.pushNamed('login');
+          context.pushNamed('cart');
         },
         leftIcon: Icons.search,
-        rightIcon: Icons.logout_rounded,
+        rightIcon: Icons.shopping_bag_outlined,
         leftIconOnPressed: () => context.pushNamed('search'),
       ),
       body: Stack(
@@ -113,7 +112,7 @@ class HomeScreen extends ConsumerWidget {
                   SizedBox(height: 10),
                   Text(
                     'Los más vendidos',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                   _buildBody(homeState),
                 ],
@@ -131,7 +130,7 @@ class HomeScreen extends ConsumerWidget {
                     context.pushNamed('home');
                     break;
                   case 1:
-                    context.pushNamed('cart');
+                    context.pushNamed('support');
                     break;
 
                   case 2:
@@ -139,7 +138,7 @@ class HomeScreen extends ConsumerWidget {
                     break;
                   case 3:
                     ref.read(authNotifierProvider.notifier).logout();
-                    context.pushNamed('login');
+                    context.pushNamed('logout');
                     break;
                   default:
                 }
@@ -169,7 +168,7 @@ class HomeScreen extends ConsumerWidget {
 
   Widget _buildProductList(List<Product> products) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: GridView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),

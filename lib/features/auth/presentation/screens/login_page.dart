@@ -47,74 +47,76 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(20),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      const Text(
-                        'Login',
-                        style: TextStyle(
-                          fontSize: 36,
-                          fontWeight: FontWeight.w700,
+                child: SingleChildScrollView(
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        const Text(
+                          'Login',
+                          style: TextStyle(
+                            fontSize: 36,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 40),
-                      CustomTextField(
-                        label: 'Nombre de usuario',
-                        controller: emailController,
-                        validator: (email) => Utils.validateInput(email),
-                        hasSuffixIcon: false,
-                      ),
-                      const SizedBox(height: 20),
-
-                      CustomTextField(
-                        label: 'Contraseña',
-                        controller: passwordController,
-                        validator: (password) => Utils.validateInput(password),
-                        hasSuffixIcon: true,
-                      ),
-                      if (authState is AuthError)
-                        ErrorMessage(message: authState.message),
-                      const SizedBox(height: 40),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: PrimaryButton(
-                              text: 'Login',
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  ref
-                                      .read(authNotifierProvider.notifier)
-                                      .login(
-                                        emailController.text,
-                                        passwordController.text,
-                                      );
-                                }
-
-                                if (ref.read(authNotifierProvider)
-                                    is AuthAuthenticated) {
-                                  if (context.mounted) {
-                                    context.goNamed('home');
+                        const SizedBox(height: 40),
+                        CustomTextField(
+                          label: 'Nombre de usuario',
+                          controller: emailController,
+                          validator: (email) => Utils.validateInput(email),
+                          hasSuffixIcon: false,
+                        ),
+                        const SizedBox(height: 20),
+                  
+                        CustomTextField(
+                          label: 'Contraseña',
+                          controller: passwordController,
+                          validator: (password) => Utils.validateInput(password),
+                          hasSuffixIcon: true,
+                        ),
+                        if (authState is AuthError)
+                          ErrorMessage(message: authState.message),
+                        const SizedBox(height: 40),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: PrimaryButton(
+                                text: 'Login',
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    ref
+                                        .read(authNotifierProvider.notifier)
+                                        .login(
+                                          emailController.text,
+                                          passwordController.text,
+                                        );
                                   }
-                                }
-                              },
+                  
+                                  if (ref.read(authNotifierProvider)
+                                      is AuthAuthenticated) {
+                                    if (context.mounted) {
+                                      context.goNamed('home');
+                                    }
+                                  }
+                                },
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 20),
-                     
-                      Row(
-                        children: [
-                          Expanded(
-                            child: PrimaryButton(
-                              text: 'Registrarse',
-                              onPressed: () => context.pushNamed('register'),
+                          ],
+                        ),
+                        SizedBox(height: 20),
+                       
+                        Row(
+                          children: [
+                            Expanded(
+                              child: PrimaryButton(
+                                text: 'Registrarse',
+                                onPressed: () => context.pushNamed('register'),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -36,6 +36,14 @@
 		<data>
 		/CUoTuPQqqdexfyOT9lpJhV+2MQ=
 		</data>
+		<key>flutter_assets/isolate_snapshot_data</key>
+		<data>
+		gRDbYzMNgtJeT9rLZDdiOJ0RXMg=
+		</data>
+		<key>flutter_assets/kernel_blob.bin</key>
+		<data>
+		ehkgP/f2yTxnWTwJSOIuKraJzyM=
+		</data>
 		<key>flutter_assets/packages/atomic_design_system/assets/fonts/Montserrat-Bold.ttf</key>
 		<data>
 		x9kHcir0+4RauX1RW7QU8pZR8AA=
@@ -51,6 +59,10 @@
 		<key>flutter_assets/shaders/ink_sparkle.frag</key>
 		<data>
 		VoVnsu58hN7wrwazX0nyAopiB0Q=
+		</data>
+		<key>flutter_assets/vm_snapshot_data</key>
+		<data>
+		6f33nJbLQOxwLNQ7Pq7TZR9ENuo=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -104,6 +116,20 @@
 			2YZbZxoJ1oPROoYwidiCXg9ho3aWzl19RIvIAjqmJFM=
 			</data>
 		</dict>
+		<key>flutter_assets/isolate_snapshot_data</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Ut/uEhc6+hUf6S/IpyxQydpXSJV0AmyYEkKu13s4D6o=
+			</data>
+		</dict>
+		<key>flutter_assets/kernel_blob.bin</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			NNuRj2vHaKSWWQfBZRRENe0zdtu5tcOfQRURS3ikhvg=
+			</data>
+		</dict>
 		<key>flutter_assets/packages/atomic_design_system/assets/fonts/Montserrat-Bold.ttf</key>
 		<dict>
 			<key>hash2</key>
@@ -130,6 +156,13 @@
 			<key>hash2</key>
 			<data>
 			4PC1vOWKHlNOnW4dGwFfD4TPwBCllniPCsOy7+1X5co=
+			</data>
+		</dict>
+		<key>flutter_assets/vm_snapshot_data</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			EkAQI7At/OAUaTSQUy3t6/4PpHWrvbPs+YdJHmzJ978=
 			</data>
 		</dict>
 	</dict>

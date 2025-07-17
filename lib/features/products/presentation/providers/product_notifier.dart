@@ -40,6 +40,8 @@ class ProductNotifier extends StateNotifier<ProductState> {
     }
   }
 
+  
+
   Future<void> getCategories() async {
     try {
       final categories = await _productRepository.getCategories();
