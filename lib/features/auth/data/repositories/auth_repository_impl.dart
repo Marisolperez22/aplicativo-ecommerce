@@ -1,20 +1,24 @@
+import 'package:either_dart/either.dart';
 import 'package:fake_store_get_request/models/login_response.dart';
-import 'package:fake_store_get_request/services/fake_store_service.dart';
 
+import '../../../../core/error/failure.dart';
 import '../../domain/repositories/auth_repository.dart';
+import '../datasources/auth_datasource.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-      final remoteDataSource = FakeStoreService();
+  final AuthDatasource remoteDataSource;
 
+  AuthRepositoryImpl({required this.remoteDataSource});
 
-  AuthRepositoryImpl();
-
-  @override
-  Future<LoginResponse> login(String email, String password) async {
+  Future<Either<Failure, LoginResponse>> login(
+    String email,
+    String password,
+  ) async {
     try {
-      return await remoteDataSource.login(email, password);
+      final LoginResponse login = await remoteDataSource.login(email, password);
+      return Right(login);
     } catch (e) {
-      throw Exception('Login failed: $e');
+      return Left();
     }
   }
 }

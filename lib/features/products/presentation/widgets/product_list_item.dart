@@ -11,11 +11,13 @@ class ProductListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.pushNamed(
-          'product_detail',
-          pathParameters: {'id': product.id.toString()},
-        ),
+      onTap:
+          () => context.pushNamed(
+            'product_detail',
+            pathParameters: {'id': product.id.toString()},
+          ),
       child: ProductCard(
+        addToTheCart: () {},
         productName: product.title ?? '',
         price: product.price.toString(),
         rating: '5',

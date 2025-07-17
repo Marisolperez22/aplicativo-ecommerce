@@ -13,10 +13,10 @@ packages:
     dependency: transitive
     description:
       name: analyzer
-      sha256: abf63d42450c7ad6d8188887d16eeba2f1ff92ea8d8dc673213e99fb3c02b194
+      sha256: b1ade5707ab7a90dfd519eaac78a7184341d19adb6096c68d499b59c7c6cf880
       url: "https://pub.dev"
     source: hosted
-    version: "7.5.7"
+    version: "7.7.0"
   args:
     dependency: transitive
     description:
@@ -38,7 +38,7 @@ packages:
     description:
       path: atomic_design_system
       ref: HEAD
-      resolved-ref: b817b75e31bd4d5eabb44c5306ead7c73857eed5
+      resolved-ref: caf6a510e64873bf5a52e8310b329537d97c26f0
       url: "https://github.com/Marisolperez22/atomic_desing_system.git"
     source: git
     version: "0.0.1"
@@ -178,6 +178,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.0"
+  either_dart:
+    dependency: "direct main"
+    description:
+      name: either_dart
+      sha256: "0b57f6a9410ce0ba2cc340220109f545bf4bad1b06b242219f0af11ab9e84f0e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -191,7 +199,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: d1204b63cd77ab8527f37b087597352a0eca242f
+      resolved-ref: e776b8eb02ef61c1c0a13d7b4a2fdeef73b43fd0
       url: "https://github.com/Marisolperez22/fake_store_get_request"
     source: git
     version: "0.0.2"

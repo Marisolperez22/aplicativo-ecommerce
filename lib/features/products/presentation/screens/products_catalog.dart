@@ -100,6 +100,7 @@ class ProductsCatalog extends ConsumerWidget {
       itemBuilder: (context, index) {
         final product = products[index];
         return ProductCard(
+          addToTheCart: (){},
           productName: product.title ?? '',
           price: product.price.toString(),
           rating: '5',
