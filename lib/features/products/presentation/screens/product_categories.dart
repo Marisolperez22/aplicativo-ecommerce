@@ -1,11 +1,11 @@
-import 'package:atomic_design_system/atomic_design_system.dart';
-import 'package:ecommerce/core/widgets/screen_widget.dart';
-import 'package:fake_store_get_request/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ecommerce/core/widgets/screen_widget.dart';
+import 'package:fake_store_get_request/models/product.dart';
+import 'package:atomic_design_system/atomic_design_system.dart';
 
 import '../../../../core/widgets/generic_app_bar.dart';
-import '../providers/catalog_notifier.dart';
+import '../providers/providers.dart';
 import '../widgets/product_card.dart';
 
 class ProductCategories extends ConsumerWidget {
@@ -14,8 +14,8 @@ class ProductCategories extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final categoriesAsync = ref.watch(categoriesProvider);
-    final productsAsync = ref.watch(productsByCategoryProvider);
     final selectedCategory = ref.watch(selectedCategoryProvider);
+    final productsAsync = ref.watch(productsByCategoryProvider);
     final screenWidth = MediaQuery.of(context).size.width;
 
     return ScreenWidget(
@@ -31,12 +31,11 @@ class ProductCategories extends ConsumerWidget {
             screenWidth: screenWidth,
           ),
           const SizedBox(height: 12),
-          _buildCategoryTitle(selectedCategory, screenWidth),
+          _buildCategoryTitle(selectedCategory ?? 'Todas', screenWidth),
           const SizedBox(height: 12),
           Expanded(child: _buildProducts(productsAsync, screenWidth)),
         ],
       ),
-      // appBarTitle: 'Catálogo de Productos',
     );
   }
 
@@ -52,7 +51,10 @@ class ProductCategories extends ConsumerWidget {
         loading: () => const Center(child: CircularProgressIndicator()),
         error:
             (error, stack) => Center(
-              child: Text('Error: $error', style: TextStyle(color: Colors.red)),
+              child: Text(
+                'Error: $error',
+                style: const TextStyle(color: Colors.red),
+              ),
             ),
         data: (categories) {
           final allCategories = ['Todas', ...categories];
@@ -92,10 +94,7 @@ class ProductCategories extends ConsumerWidget {
             _formatCategoryName(category),
             style: TextStyle(
               fontSize: fontSize,
-              color:
-                  isSelected
-                      ? Colors.white
-                      : AtomicSystemColorsFoundation.colorButtonPrimary,
+              color: Colors.white,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -104,18 +103,13 @@ class ProductCategories extends ConsumerWidget {
             ref.read(selectedCategoryProvider.notifier).state = category;
             ref
                 .read(productsByCategoryProvider.notifier)
-                .getProductsByCategory(category);
+                .loadProducts(category);
           },
-          backgroundColor: const Color.fromARGB(255, 255, 208, 198),
-          selectedColor: AtomicSystemColorsFoundation.colorButtonPrimary,
+          backgroundColor: AtomicSystemColorsFoundation.colorButtonPrimary,
+          selectedColor: const Color.fromARGB(255, 203, 63, 31),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
-            side: BorderSide(
-              color:
-                  isSelected
-                      ? AtomicSystemColorsFoundation.colorButtonPrimary
-                      : const Color.fromARGB(255, 255, 208, 198),
-            ),
+            side: BorderSide(color: Colors.transparent),
           ),
           padding: EdgeInsets.symmetric(
             horizontal: isLargeScreen ? 20 : 16,
@@ -127,7 +121,7 @@ class ProductCategories extends ConsumerWidget {
     );
   }
 
-  Widget _buildCategoryTitle(String? selectedCategory, double screenWidth) {
+  Widget _buildCategoryTitle(String selectedCategory, double screenWidth) {
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: screenWidth > 600 ? 24.0 : 16.0,
@@ -135,9 +129,9 @@ class ProductCategories extends ConsumerWidget {
       child: Align(
         alignment: Alignment.centerLeft,
         child: Text(
-          selectedCategory != null
-              ? _formatCategoryName(selectedCategory)
-              : 'Todos los productos',
+          selectedCategory == 'Todas'
+              ? 'Todos los productos'
+              : _formatCategoryName(selectedCategory),
           style: TextStyle(
             fontSize: screenWidth > 600 ? 24 : 20,
             fontWeight: FontWeight.bold,
@@ -169,7 +163,7 @@ class ProductCategories extends ConsumerWidget {
                   'Error al cargar productos',
                   style: TextStyle(fontSize: screenWidth > 600 ? 20 : 18),
                 ),
-                Text('$error', style: TextStyle(color: Colors.grey)),
+                Text('$error', style: const TextStyle(color: Colors.grey)),
               ],
             ),
           ),
@@ -223,21 +217,20 @@ class ProductCategories extends ConsumerWidget {
   }
 
   int _calculateCrossAxisCount(double screenWidth) {
-    if (screenWidth > 1800) return 6; // Pantallas muy grandes
-    if (screenWidth > 1400) return 5; // Monitores grandes
-    if (screenWidth > 1100) return 4; // Laptops grandes
-    if (screenWidth > 800) return 3; // Tablets grandes/laptops pequeñas
-    if (screenWidth > 500) return 2; // Tablets pequeñas
-    return 2; // Móviles
+    if (screenWidth > 1800) return 6;
+    if (screenWidth > 1400) return 5;
+    if (screenWidth > 1100) return 4;
+    if (screenWidth > 800) return 3;
+    if (screenWidth > 500) return 2;
+    return 2;
   }
 
   double _calculateAspectRatio(double screenWidth) {
-    if (screenWidth > 1800)
-      return 0.65; // Más compacto en pantallas muy grandes
+    if (screenWidth > 1800) return 0.65;
     if (screenWidth > 1400) return 0.7;
     if (screenWidth > 1100) return 0.75;
     if (screenWidth > 800) return 0.8;
-    return 0.85; // Más alto en móviles
+    return 0.85;
   }
 
   String _formatCategoryName(String category) {

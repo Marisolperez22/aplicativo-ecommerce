@@ -1,5 +1,5 @@
-import 'package:ecommerce/core/widgets/title.dart';
 import 'package:flutter/material.dart';
+import 'package:ecommerce/core/widgets/title.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ecommerce/core/widgets/screen_widget.dart';
 import 'package:fake_store_get_request/models/product.dart';
@@ -7,8 +7,9 @@ import 'package:atomic_design_system/atomic_design_system.dart';
 
 import '../../../../core/widgets/generic_app_bar.dart';
 import '../../../../core/widgets/rating_widget.dart';
-import '../providers/product_detail_notifier.dart';
+import '../../../../core/errors/failure.dart';
 import '../providers/cart_notifier.dart';
+import '../providers/providers.dart';
 
 class ProductDetailScreen extends ConsumerWidget {
   final String productId;
@@ -17,32 +18,32 @@ class ProductDetailScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final productState = ref.watch(productDetailNotifierProvider(productId));
+    final productsAsync = ref.watch(
+      productDetailProvider(int.tryParse(productId) ?? 0),
+    );
 
     return ScreenWidget(
       appBar: GenericAppBar(title: 'Detalle del producto'),
-      body: _buildBody(productState, context, ref),
+      body: productsAsync.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, stack) {
+          if (error is Failure) {
+            return Center(child: Text(error.message ?? ''));
+          }
+          return Center(child: Text('Error: $error'));
+        },
+        data: (either) {
+          return either.fold(
+            (failure) => Center(child: Text(failure.message ?? '')),
+            (product) => _buildProductDetail(
+              product: product,
+              ref: ref,
+              context: context,
+            ),
+          );
+        },
+      ),
     );
-  }
-
-  Widget _buildBody(
-    ProductDetailState state,
-    BuildContext context,
-    WidgetRef ref,
-  ) {
-    if (state is ProductDetailLoading) {
-      return const Center(child: CircularProgressIndicator());
-    } else if (state is ProductDetailError) {
-      return Center(child: Text(state.message));
-    } else if (state is ProductDetailLoaded) {
-      return _buildProductDetail(
-        product: state.product,
-        context: context,
-        ref: ref,
-      );
-    } else {
-      return const Center(child: Text('Estado desconocido'));
-    }
   }
 
   Widget _buildProductDetail({
@@ -56,7 +57,6 @@ class ProductDetailScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Imagen del producto
-            
             Center(
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 20),

@@ -91,6 +91,9 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
         email: _emailController.text,
         username: _usernameController.text,
         password: _passwordController.text,
+        firstName: '',
+        lastName: '',
+        phone: '',
       );
 
       ref.read(signUpNotifierProvider.notifier).signUp(request);

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/* import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ecommerce/core/widgets/search_app_bar.dart';
 import 'package:fake_store_get_request/models/product.dart';
@@ -104,3 +104,4 @@ class SearchScreen extends ConsumerWidget {
     );
   }
 }
+ */

@@ -1,58 +1,70 @@
+import 'package:either_dart/either.dart';
+import 'package:injectable/injectable.dart';
 import 'package:fake_store_get_request/models/cart.dart';
 import 'package:fake_store_get_request/models/product.dart';
-import 'package:fake_store_get_request/services/fake_store_service.dart';
 
+import '../../../../core/utils/utils.dart';
+import '../../../../core/errors/failure.dart';
+import '../datasources/products_datasource.dart';
 import '../../domain/repositories/product_repository.dart';
 
+@Injectable(as: ProductRepository)
 class ProductRepositoryImpl implements ProductRepository {
-  final remoteDataSource = FakeStoreService();
+  final IProductsDatasource _productsDatasources;
 
-  ProductRepositoryImpl();
-
-  @override
-  Future<List<Product>> getProducts() async {
-    try {
-      return await remoteDataSource.getProducts();
-    } catch (e) {
-      throw Exception('Loading products failed: $e');
-    }
-  }
+  ProductRepositoryImpl({required IProductsDatasource productsDatasources})
+    : _productsDatasources = productsDatasources;
 
   @override
-  Future<Product> getProductDetail(int productId) async {
+  Future<Either<Failure, List<Product>>> getProducts() async {
     try {
-      return await remoteDataSource.getProductDetail(productId);
+      final products = await _productsDatasources.getProducts();
+      return Right(products);
     } catch (e) {
-      throw Exception('Loading product details failed: $e');
+      return Utils.handleException(e);
     }
   }
 
   @override
-  Future<List<String>> getCategories() async {
+  Future<Either<Failure, Product>> getProductDetail(int productId) async {
     try {
-      return await remoteDataSource.getCategories();
+      final product = await _productsDatasources.getProductDetail(productId);
+      return Right(product);
     } catch (e) {
-      throw Exception('Error loading categories $e');
+      return Utils.handleException(e);
     }
   }
 
   @override
-  Future<List<Product>> getProductsByCategory(String category) async {
+  Future<Either<Failure, List<String>>> getCategories() async {
     try {
-      return await remoteDataSource.getProductByCategory(category);
+      final categories = await _productsDatasources.getCategories();
+      return Right(categories);
     } catch (e) {
-      throw Exception('Loading products by category failed: $e');
+      return Utils.handleException(e);
     }
   }
 
-    @override
-  Future<List<Cart>> getUserCart(int idUser) async {
+  @override
+  Future<Either<Failure, List<Product>>> getProductsByCategory(
+    String category,
+  ) async {
     try {
-      return await remoteDataSource.getUserCart(idUser);
+      final productsByCategory = await _productsDatasources
+          .getProductsByCategory(category);
+      return Right(productsByCategory);
     } catch (e) {
-      throw Exception('Error getting user cart: $e');
+      return Utils.handleException(e);
     }
   }
 
-  
+  @override
+  Future<Either<Failure, List<Cart>>> getUserCart(int idUser) async {
+    try {
+      final cart = await _productsDatasources.getUserCart(idUser);
+      return Right(cart);
+    } catch (e) {
+      return Utils.handleException(e);
+    }
+  }
 }

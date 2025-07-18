@@ -59,7 +59,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/search',
         name: 'search',
-        builder: (context, state) => const SearchScreen(),
+        builder: (context, state) => const ProductCategories(),
       ),
       GoRoute(
         path: '/catalog',

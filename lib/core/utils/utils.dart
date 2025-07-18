@@ -1,3 +1,8 @@
+import 'package:ecommerce/core/errors/failure.dart';
+import 'package:either_dart/either.dart';
+
+import '../errors/exceptions.dart';
+
 class Utils {
   static String? validateInput(String? value) {
     if (value == null || value.isEmpty) {
@@ -28,5 +33,28 @@ class Utils {
     if (screenWidth > 1200) return 0.65;
     if (screenWidth > 900) return 0.7;
     return 0.75;
+  }
+
+  static Either<Failure, T> handleException<T>(dynamic e) {
+    if (e is BaseClientException) {
+      if (e.type == 'TimeoutException') {
+        return const Left(TimeOutFailure());
+      }
+      if (e.type == 'UnAuthorization') {
+        return const Left(AuthFailure());
+      }
+      if (e.type == 'BadRequest') {
+        return Left(
+          BadRequest(
+            title: e.title,
+            message: e.message,
+            codeError: e.codeError,
+          ),
+        );
+      }
+      return const Left(AnotherFailure());
+    } else {
+      return const Left(AnotherFailure());
+    }
   }
 }
