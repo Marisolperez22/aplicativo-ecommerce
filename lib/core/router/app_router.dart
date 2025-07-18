@@ -1,17 +1,15 @@
-// app_router.dart
-import 'package:ecommerce/features/products/presentation/screens/cart_screen.dart';
-import 'package:ecommerce/features/products/presentation/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ecommerce/features/products/presentation/screens/cart_screen.dart';
+import 'package:ecommerce/features/products/presentation/screens/search_screen.dart';
 
-import '../../features/auth/presentation/screens/login_page.dart';
-import '../../features/auth/presentation/providers/auth_notifier.dart';
 import '../../features/auth/presentation/screens/register_page.dart';
+import '../../features/auth/presentation/providers/auth_notifier.dart';
 import '../../features/products/presentation/screens/home_screen.dart';
-import '../../features/products/presentation/screens/product_detail_screen.dart';
-import '../../features/products/presentation/screens/products_catalog.dart';
 import '../../features/products/presentation/screens/support_screen.dart';
+import '../../features/products/presentation/screens/product_categories.dart';
+import '../../features/products/presentation/screens/product_detail_screen.dart';
 
 final _routerAuthNotifier = Provider((ref) {
   final auth = ref.watch(authNotifierProvider.notifier);
@@ -66,7 +64,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/catalog',
         name: 'catalog',
-        builder: (context, state) => const ProductsCatalog(),
+        builder: (context, state) => const ProductCategories(),
       ),
       GoRoute(
         path: '/cart',

@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fake_store_get_request/models/sing_up_request.dart';
 
 import '../../../../core/utils/utils.dart';
+import '../../../../core/widgets/generic_app_bar.dart';
 import '../providers/sign_up_notifier.dart';
 
 class RegisterPage extends ConsumerStatefulWidget {
@@ -33,7 +34,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
     final state = ref.watch(signUpNotifierProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Registro')),
+      appBar: GenericAppBar(title: 'Registro'),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Form(
