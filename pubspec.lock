@@ -38,7 +38,7 @@ packages:
     description:
       path: atomic_design_system
       ref: HEAD
-      resolved-ref: caf6a510e64873bf5a52e8310b329537d97c26f0
+      resolved-ref: "56b04c357798d96c4e03936e55f3216f9f7dc6b5"
       url: "https://github.com/Marisolperez22/atomic_desing_system.git"
     source: git
     version: "0.0.1"
@@ -178,6 +178,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.0"
+  dio:
+    dependency: "direct main"
+    description:
+      name: dio
+      sha256: "253a18bbd4851fecba42f7343a1df3a9a4c1d31a2c1b37e221086b4fa8c8dbc9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.8.0+1"
+  dio_web_adapter:
+    dependency: transitive
+    description:
+      name: dio_web_adapter
+      sha256: "7586e476d70caecaf1686d21eee7247ea43ef5c345eab9e0cc3583ff13378d78"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.1"
+  either_dart:
+    dependency: "direct main"
+    description:
+      name: either_dart
+      sha256: "0b57f6a9410ce0ba2cc340220109f545bf4bad1b06b242219f0af11ab9e84f0e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   fake_async:
     dependency: transitive
     description:

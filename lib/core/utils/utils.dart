@@ -29,4 +29,5 @@ class Utils {
     if (screenWidth > 900) return 0.7;
     return 0.75;
   }
+  
 }

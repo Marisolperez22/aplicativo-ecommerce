@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ecommerce/core/widgets/search_app_bar.dart';
 import 'package:fake_store_get_request/models/product.dart';
+import 'package:atomic_design_system/pages/screen_widget.dart';
+import 'package:atomic_design_system/atoms/appbars/search_app_bar.dart';
 
 import '../../../../core/widgets/gridview_widget.dart';
-import '../../../../core/widgets/screen_widget.dart';
 import '../providers/product_notifier.dart';
 
 class SearchScreen extends ConsumerWidget {

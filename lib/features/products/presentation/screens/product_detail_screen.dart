@@ -1,12 +1,12 @@
-import 'package:ecommerce/core/widgets/title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ecommerce/core/widgets/screen_widget.dart';
 import 'package:fake_store_get_request/models/product.dart';
+import 'package:atomic_design_system/pages/screen_widget.dart';
 import 'package:atomic_design_system/atomic_design_system.dart';
+import 'package:atomic_design_system/atoms/text/text_title.dart';
+import 'package:atomic_design_system/atoms/appbars/generic_app_bar.dart';
+import 'package:atomic_design_system/molecules/rating_widget.dart';
 
-import '../../../../core/widgets/generic_app_bar.dart';
-import '../../../../core/widgets/rating_widget.dart';
 import '../providers/product_detail_notifier.dart';
 import '../providers/cart_notifier.dart';
 

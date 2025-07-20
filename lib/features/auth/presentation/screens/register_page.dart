@@ -1,11 +1,11 @@
-import 'package:atomic_design_system/atomic_design_system.dart';
-import 'package:ecommerce/features/auth/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:atomic_design_system/atomic_design_system.dart';
 import 'package:fake_store_get_request/models/sing_up_request.dart';
+import 'package:atomic_design_system/atoms/appbars/generic_app_bar.dart';
 
+import '../widgets/custom_text_field.dart';
 import '../../../../core/utils/utils.dart';
-import '../../../../core/widgets/generic_app_bar.dart';
 import '../providers/sign_up_notifier.dart';
 
 class RegisterPage extends ConsumerStatefulWidget {

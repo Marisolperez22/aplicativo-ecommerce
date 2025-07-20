@@ -1,8 +1,8 @@
-import 'package:ecommerce/core/widgets/generic_app_bar.dart';
-import 'package:ecommerce/core/widgets/screen_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:atomic_design_system/pages/screen_widget.dart';
 import 'package:atomic_design_system/atomic_design_system.dart';
+import 'package:atomic_design_system/atoms/appbars/generic_app_bar.dart';
 
 import '../../data/models/cart_item.dart';
 import '../providers/cart_notifier.dart';
@@ -15,6 +15,7 @@ class CartScreen extends ConsumerWidget {
     final cartItems = ref.watch(cartNotifierProvider);
 
     return ScreenWidget(
+      
       hasSingleChilScroll: false,
       appBar: GenericAppBar(title: 'Carrito'),
       body: Column(

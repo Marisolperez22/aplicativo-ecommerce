@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ecommerce/core/widgets/title.dart';
-import 'package:ecommerce/core/widgets/home_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fake_store_get_request/models/product.dart';
+import 'package:atomic_design_system/pages/screen_widget.dart';
+import 'package:atomic_design_system/molecules/home_card.dart';
 import 'package:atomic_design_system/atomic_design_system.dart';
+import 'package:atomic_design_system/atoms/text/text_title.dart';
 
+import '../../../auth/presentation/providers/auth_notifier.dart';
 import '../../../../core/widgets/gridview_widget.dart';
-import '../../../../core/widgets/screen_widget.dart';
 import '../providers/product_notifier.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -16,6 +17,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final homeState = ref.watch(productNotifierProvider);
+
     final screenWidth = MediaQuery.of(context).size.width;
     final Product featuredProduct =
         (homeState is ProductsLoaded) ? homeState.products[13] : Product(id: 0);
@@ -59,6 +61,23 @@ class HomeScreen extends ConsumerWidget {
           _buildBody(homeState, screenWidth),
         ],
       ),
+      onNavItemTap: (index) {
+                    switch (index) {
+                      case 0:
+                        context.replaceNamed('home');
+                        break;
+                      case 1:
+                        context.pushNamed('support');
+                        break;
+                      case 2:
+                        context.pushNamed('catalog');
+                        break;
+                      case 3:
+                         ref.read(authNotifierProvider.notifier).logout();
+                        context.pushNamed('login');
+                        break;
+                    }
+                  },
     );
   }
 

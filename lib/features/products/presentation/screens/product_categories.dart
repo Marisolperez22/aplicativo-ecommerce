@@ -1,10 +1,10 @@
-import 'package:atomic_design_system/atomic_design_system.dart';
-import 'package:ecommerce/core/widgets/screen_widget.dart';
-import 'package:fake_store_get_request/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fake_store_get_request/models/product.dart';
+import 'package:atomic_design_system/pages/screen_widget.dart';
+import 'package:atomic_design_system/atomic_design_system.dart';
+import 'package:atomic_design_system/atoms/appbars/generic_app_bar.dart';
 
-import '../../../../core/widgets/generic_app_bar.dart';
 import '../providers/catalog_notifier.dart';
 import '../widgets/product_card.dart';
 

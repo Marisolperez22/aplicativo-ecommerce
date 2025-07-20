@@ -15,11 +15,6 @@ class LocalStorageService {
     return prefs.getInt(_userIdKey);
   }
 
-  static Future<void> clearUserId() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove(_userIdKey);
-  }
-
     static Future<void> saveUserName(String userName) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_userNameKey, userName);
@@ -30,8 +25,4 @@ class LocalStorageService {
     return prefs.getString(_userNameKey);
   }
 
-  static Future<void> clearUserName() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove(_userNameKey);
-  }
 }
