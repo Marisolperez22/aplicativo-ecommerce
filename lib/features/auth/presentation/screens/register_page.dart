@@ -1,12 +1,13 @@
-import 'package:atomic_design_system/atomic_design_system.dart';
-import 'package:ecommerce/features/auth/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:atomic_design_system/atomic_design_system.dart';
 import 'package:fake_store_get_request/models/sing_up_request.dart';
+import 'package:atomic_design_system/atoms/appbars/generic_app_bar.dart';
+import 'package:atomic_design_system/atoms/text_fields/custom_text_field.dart';
 
 import '../../../../core/utils/utils.dart';
-import '../../../../core/widgets/generic_app_bar.dart';
 import '../providers/sign_up_notifier.dart';
+import '../../../../core/widgets/screen_widget.dart';
 
 class RegisterPage extends ConsumerStatefulWidget {
   const RegisterPage({super.key});
@@ -33,52 +34,49 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
   Widget build(BuildContext context) {
     final state = ref.watch(signUpNotifierProvider);
 
-    return Scaffold(
+    return ScreenWidget(
       appBar: GenericAppBar(title: 'Registro'),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Form(
-          key: _formKey,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                CustomTextField(
-                  label: 'Nombre de usuario',
-                  controller: _usernameController,
-                  validator: (userName) => Utils.validateInput(userName),
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              CustomTextField(
+                label: 'Nombre de usuario',
+                controller: _usernameController,
+                validator: (userName) => Utils.validateInput(userName),
+              ),
+              SizedBox(height: 30),
+              CustomTextField(
+                label: 'Correo',
+                controller: _emailController,
+                validator: (correo) => Utils.validateEmail(correo),
+              ),
+              SizedBox(height: 30),
+              CustomTextField(
+                label: 'Contraseña',
+                hasSuffixIcon: true,
+                controller: _passwordController,
+                validator: (password) => Utils.validateInput(password),
+              ),
+      
+              const SizedBox(height: 30),
+              if (state is SignUpLoading)
+                const CircularProgressIndicator()
+              else
+                PrimaryButton(
+                  text: 'Registrarse',
+                  onPressed: () => _submitForm(state),
                 ),
-                SizedBox(height: 30),
-                CustomTextField(
-                  label: 'Correo',
-                  controller: _emailController,
-                  validator: (correo) => Utils.validateEmail(correo),
-                ),
-                SizedBox(height: 30),
-                CustomTextField(
-                  label: 'Contraseña',
-                  hasSuffixIcon: true,
-                  controller: _passwordController,
-                  validator: (password) => Utils.validateInput(password),
-                ),
-
-                const SizedBox(height: 30),
-                if (state is SignUpLoading)
-                  const CircularProgressIndicator()
-                else
-                  PrimaryButton(
-                    text: 'Registrarse',
-                    onPressed: () => _submitForm(state),
+              if (state is SignUpError)
+                Padding(
+                  padding: const EdgeInsets.only(top: 16.0),
+                  child: Text(
+                    state.message,
+                    style: const TextStyle(color: Colors.red),
                   ),
-                if (state is SignUpError)
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16.0),
-                    child: Text(
-                      state.message,
-                      style: const TextStyle(color: Colors.red),
-                    ),
-                  ),
-              ],
-            ),
+                ),
+            ],
           ),
         ),
       ),
@@ -91,9 +89,6 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
         email: _emailController.text,
         username: _usernameController.text,
         password: _passwordController.text,
-        firstName: '',
-        lastName: '',
-        phone: '',
       );
 
       ref.read(signUpNotifierProvider.notifier).signUp(request);

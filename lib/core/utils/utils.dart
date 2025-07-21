@@ -1,5 +1,5 @@
-import 'package:ecommerce/core/errors/failure.dart';
 import 'package:either_dart/either.dart';
+import 'package:ecommerce/core/errors/failure.dart';
 
 import '../errors/exceptions.dart';
 

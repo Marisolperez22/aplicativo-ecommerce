@@ -1,67 +1,55 @@
-/* import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ecommerce/core/widgets/search_app_bar.dart';
-import 'package:fake_store_get_request/models/product.dart';
 
-import '../../../../core/widgets/gridview_widget.dart';
+import '../providers/providers.dart';
 import '../../../../core/widgets/screen_widget.dart';
-import '../providers/product_notifier.dart';
+import '../../../../core/widgets/search_app_bar.dart';
+import '../../../../core/widgets/gridview_widget.dart';
 
 class SearchScreen extends ConsumerWidget {
   const SearchScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final productState = ref.watch(productNotifierProvider);
+    final productsAsync = ref.watch(productsListProvider);
     final searchQuery = ref.watch(searchQueryProvider);
     final screenWidth = MediaQuery.of(context).size.width;
-
-    // Filtrar productos
-    List<Product> filteredProducts = [];
-    if (productState is ProductsLoaded && searchQuery.isNotEmpty) {
-      filteredProducts =
-          productState.products.where((product) {
-            return (product.title ?? '').toLowerCase().contains(
-              searchQuery.toLowerCase(),
-            );
-          }).toList();
-    }
 
     return ScreenWidget(
       appBar: SearchAppBar(
         onChanged:
             (value) => ref.read(searchQueryProvider.notifier).state = value,
       ),
-      body: _buildBody(
-        productState,
-        filteredProducts,
-        searchQuery,
-        screenWidth,
+      body: productsAsync.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error:
+            (error, stack) => Center(child: Text('Error: ${error.toString()}')),
+        data: (productsEither) {
+          return productsEither.fold(
+            (failure) => Center(child: Text('Error: ${failure.message}')),
+            (products) {
+              final filteredProducts =
+                  searchQuery.isEmpty
+                      ? products
+                      : products.where((product) {
+                        return (product.title ?? '').toLowerCase().contains(
+                          searchQuery.toLowerCase(),
+                        );
+                      }).toList();
+
+              if (searchQuery.isNotEmpty && filteredProducts.isEmpty) {
+                return _buildNoResultsState(searchQuery, screenWidth);
+              }
+
+              return GridviewWidget(
+                itemCount: filteredProducts.length,
+                products: filteredProducts,
+              );
+            },
+          );
+        },
       ),
     );
-  }
-
-  Widget _buildBody(
-    ProductState state,
-    List<Product> filteredProducts,
-    String searchQuery,
-    double screenWidth,
-  ) {
-    if (state is ProductInitial || state is ProductLoading) {
-      return const Center(child: CircularProgressIndicator());
-    } else if (state is ProductError) {
-      return Center(child: Text(state.message));
-    } else if (state is ProductsLoaded) {
-      if (filteredProducts.isEmpty && searchQuery.isNotEmpty) {
-        return _buildNoResultsState(searchQuery, screenWidth);
-      }
-
-      return GridviewWidget(
-        itemCount: filteredProducts.length,
-        products: filteredProducts,
-      );
-    }
-    return const SizedBox.shrink();
   }
 
   Widget _buildNoResultsState(String query, double screenWidth) {
@@ -104,4 +92,5 @@ class SearchScreen extends ConsumerWidget {
     );
   }
 }
- */
+
+final searchQueryProvider = StateProvider<String>((ref) => '');

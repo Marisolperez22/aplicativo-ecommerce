@@ -1,8 +1,7 @@
-import 'package:fake_store_get_request/models/login_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fake_store_get_request/models/login_response.dart';
 
-import '../../../../core/utils/local_storage_service.dart';
 import '../../data/repositories/auth_repository_impl.dart';
 import '../../domain/repositories/auth_repository.dart';
 
@@ -26,14 +25,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     try {
       final response = await _authRepository.login(email, password);
 
-      await LocalStorageService.saveUserId(response.userId);
-      await LocalStorageService.saveUserName(email);
-
-      final userName = await LocalStorageService.getUserName();
-
-
-      state = AuthAuthenticated(response, userName ?? '');
-     
+      state = AuthAuthenticated(response, '');
     } catch (e) {
       state = AuthError(e.toString());
     }
@@ -41,7 +33,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   Future<void> logout() async {
     state = AuthInitial();
-  }   
+  }
 }
 
 @immutable

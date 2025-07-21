@@ -38,7 +38,7 @@ packages:
     description:
       path: atomic_design_system
       ref: HEAD
-      resolved-ref: "56b04c357798d96c4e03936e55f3216f9f7dc6b5"
+      resolved-ref: "5e3d248b48acd2b93358bc33573fefc772f06550"
       url: "https://github.com/Marisolperez22/atomic_desing_system.git"
     source: git
     version: "0.0.1"

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ecommerce/features/products/presentation/screens/cart_screen.dart';
 import 'package:ecommerce/features/products/presentation/screens/search_screen.dart';
 
+import '../../features/auth/presentation/screens/login_screen.dart';
 import '../../features/auth/presentation/screens/register_page.dart';
 import '../../features/auth/presentation/providers/auth_notifier.dart';
 import '../../features/products/presentation/screens/home_screen.dart';
@@ -41,7 +42,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/login',
         name: 'login',
-        builder: (context, state) => const HomeScreen(),
+        builder: (context, state) => const LoginScreen(),
       ),
       GoRoute(
         path: '/home',
@@ -59,7 +60,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/search',
         name: 'search',
-        builder: (context, state) => const ProductCategories(),
+        builder: (context, state) => const SearchScreen(),
       ),
       GoRoute(
         path: '/catalog',

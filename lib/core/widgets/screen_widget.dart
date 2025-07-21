@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:atomic_design_system/atomic_design_system.dart';
 
-class ScreenWidget extends StatelessWidget {
+import '../../features/auth/presentation/providers/auth_notifier.dart';
+
+class ScreenWidget extends ConsumerWidget {
   final Widget body;
   final bool hasBottomNavigationBar;
   final PreferredSizeWidget? appBar;
@@ -17,7 +20,7 @@ class ScreenWidget extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isLargeScreen = screenWidth > 600;
 
@@ -71,7 +74,7 @@ class ScreenWidget extends StatelessWidget {
                         context.pushNamed('catalog');
                         break;
                       case 3:
-                        // ref.read(authNotifierProvider.notifier).logout();
+                         ref.read(authNotifierProvider.notifier).logout();
                         context.pushNamed('login');
                         break;
                     }
