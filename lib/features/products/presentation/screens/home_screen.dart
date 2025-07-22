@@ -44,7 +44,6 @@ class HomeScreen extends ConsumerWidget {
                 /// Producto destacado
                 HomeCard(
                   productTitle: products[13].title ?? '',
-
                   description: 'Ahora el 25% de descuento',
                   buttonTitle: 'Comprar ahora',
                   buttonOnPressed:
@@ -57,7 +56,7 @@ class HomeScreen extends ConsumerWidget {
 
                 // Título de sección
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: TextTitle(title: 'Los más vendidos'),
                 ),
 
