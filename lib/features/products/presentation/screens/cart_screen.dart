@@ -1,10 +1,11 @@
-import 'package:ecommerce/core/widgets/generic_app_bar.dart';
-import 'package:ecommerce/core/widgets/screen_widget.dart';
+import 'package:atomic_design_system/widgets/cart_custom_tile.dart';
+import 'package:atomic_design_system/widgets/cart_total.dart';
+import 'package:atomic_design_system/widgets/generic_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:atomic_design_system/atomic_design_system.dart';
 
-import '../../data/models/cart_item.dart';
+import '../../../../core/utils/utils.dart';
+import '../../../../core/widgets/screen_widget.dart';
 import '../providers/cart_notifier.dart';
 
 class CartScreen extends ConsumerWidget {
@@ -24,145 +25,30 @@ class CartScreen extends ConsumerWidget {
               itemCount: cartItems.length,
               itemBuilder: (context, index) {
                 final item = cartItems[index];
-
-                return ListTile(
-                  leading: SizedBox(
-                    width: 50,
-                    child: Container(
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: FadeInImage.assetNetwork(
-                        placeholder: 'assets/placeholder.png',
-                        image: item.product.image ?? '',
-                        fit: BoxFit.contain,
-                        imageErrorBuilder:
-                            (context, error, stackTrace) => Icon(Icons.error),
-                      ),
-                    ),
-                  ),
-                  title: Text(
-                    item.product.title ?? '',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: AtomicSystemColorsFoundation.primaryColor,
-                    ),
-                  ),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '\$${item.product.price?.toStringAsFixed(2)} c/u',
-                        style: TextStyle(
-                          color: AtomicSystemColorsFoundation.primaryColor,
-                        ),
-                      ),
-                      Text('Total: \$${(item.totalPrice).toStringAsFixed(2)}'),
-                    ],
-                  ),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.remove),
-                        onPressed:
-                            () => ref
-                                .read(cartNotifierProvider.notifier)
-                                .decreaseQuantity(item.product.id),
-                      ),
-                      Text(item.quantity.toString()),
-                      IconButton(
-                        icon: Icon(Icons.add),
-                        onPressed:
-                            () => ref
-                                .read(cartNotifierProvider.notifier)
-                                .addProduct(item.product),
-                      ),
-                    ],
-                  ),
+                return CartCustomTile(
+                  imageUrl: item.product.image ?? '',
+                  title: item.product.title ?? '',
+                  price: item.product.price?.toStringAsFixed(2) ?? '0.00',
+                  totalPrice: item.totalPrice.toStringAsFixed(2),
+                  quantity: item.quantity.toString(),
+                  onDecrease:
+                      () => ref
+                          .read(cartNotifierProvider.notifier)
+                          .decreaseQuantity(item.product.id),
+                  onIncrease:
+                      () => ref
+                          .read(cartNotifierProvider.notifier)
+                          .addProduct(item.product),
                 );
               },
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Subtotal: ',
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: const Color.fromARGB(255, 106, 106, 106),
-                            ),
-                          ),
-                          Text(
-                            '\$${_calculateTotal(cartItems).toStringAsFixed(2)}',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Envío: ',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: const Color.fromARGB(255, 106, 106, 106),
-                      ),
-                    ),
-                    Text(
-                      '\$25.00',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Total: ',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      '\$${(_calculateTotal(cartItems) + 25).toStringAsFixed(2)}',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+          CartTotal(
+            subtotal: Utils.calculateTotal(cartItems).toStringAsFixed(2),
+            total: (Utils.calculateTotal(cartItems) + 25).toStringAsFixed(2),
           ),
         ],
       ),
     );
-  }
-
-  double _calculateTotal(List<CartItem> items) {
-    return items.fold(0, (sum, item) => sum + item.totalPrice);
   }
 }

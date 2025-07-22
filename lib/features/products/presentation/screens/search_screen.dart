@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:atomic_design_system/widgets/no_results.dart';
+import 'package:atomic_design_system/widgets/search_app_bar.dart';
 
 import '../providers/providers.dart';
 import '../../../../core/widgets/screen_widget.dart';
-import '../../../../core/widgets/search_app_bar.dart';
-import '../../../../core/widgets/gridview_widget.dart';
+import '../../../../core/widgets/grid_view_widget.dart';
 
 class SearchScreen extends ConsumerWidget {
   const SearchScreen({super.key});
@@ -13,7 +14,6 @@ class SearchScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final productsAsync = ref.watch(productsListProvider);
     final searchQuery = ref.watch(searchQueryProvider);
-    final screenWidth = MediaQuery.of(context).size.width;
 
     return ScreenWidget(
       appBar: SearchAppBar(
@@ -38,7 +38,7 @@ class SearchScreen extends ConsumerWidget {
                       }).toList();
 
               if (searchQuery.isNotEmpty && filteredProducts.isEmpty) {
-                return _buildNoResultsState(searchQuery, screenWidth);
+                return NoResults(query: searchQuery);
               }
 
               return GridviewWidget(
@@ -51,46 +51,4 @@ class SearchScreen extends ConsumerWidget {
       ),
     );
   }
-
-  Widget _buildNoResultsState(String query, double screenWidth) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.search_off,
-            size: screenWidth > 600 ? 80 : 60,
-            color: Colors.grey.shade400,
-          ),
-          const SizedBox(height: 20),
-          Text(
-            'No encontramos resultados para:',
-            style: TextStyle(
-              fontSize: screenWidth > 600 ? 20 : 16,
-              color: Colors.grey.shade600,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            '"$query"',
-            style: TextStyle(
-              fontSize: screenWidth > 600 ? 18 : 16,
-              color: Colors.grey.shade800,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 20),
-          Text(
-            'Intenta con otros términos de búsqueda',
-            style: TextStyle(
-              fontSize: screenWidth > 600 ? 16 : 14,
-              color: Colors.grey.shade500,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
-
-final searchQueryProvider = StateProvider<String>((ref) => '');

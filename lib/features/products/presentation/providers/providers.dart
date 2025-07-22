@@ -1,4 +1,4 @@
-import 'package:ecommerce/features/products/presentation/providers/products_by_category.dart';
+import 'products_by_category.dart';
 import 'package:either_dart/either.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fake_store_get_request/models/product.dart';
@@ -84,3 +84,5 @@ final productsByCategoryProvider = StateNotifierProvider<
   final useCase = ref.read(getProductsByCategoryUsecaseProvider);
   return ProductsByCategoryNotifier(useCase);
 });
+
+final searchQueryProvider = StateProvider<String>((ref) => '');

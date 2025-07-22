@@ -6,8 +6,8 @@ import 'package:atomic_design_system/atoms/appbars/generic_app_bar.dart';
 import 'package:atomic_design_system/atoms/text_fields/custom_text_field.dart';
 
 import '../../../../core/utils/utils.dart';
-import '../providers/sign_up_notifier.dart';
 import '../../../../core/widgets/screen_widget.dart';
+import '../providers/sign_up_notifier.dart';
 
 class RegisterPage extends ConsumerStatefulWidget {
   const RegisterPage({super.key});

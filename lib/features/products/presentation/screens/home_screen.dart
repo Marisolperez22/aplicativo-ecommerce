@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ecommerce/core/widgets/title.dart';
-import 'package:ecommerce/core/widgets/home_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fake_store_get_request/models/product.dart';
+import 'package:atomic_design_system/widgets/title.dart';
+import 'package:atomic_design_system/widgets/home_card.dart';
 import 'package:atomic_design_system/atomic_design_system.dart';
 
+import '../../../../core/widgets/grid_view_widget.dart';
 import '../providers/providers.dart';
 import '../../../../core/errors/failure.dart';
 import '../../../../core/widgets/screen_widget.dart';
-import '../../../../core/widgets/gridview_widget.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -17,8 +16,6 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final productsAsync = ref.watch(productsListProvider);
-
-    final screenWidth = MediaQuery.of(context).size.width;
 
     return ScreenWidget(
       hasBottomNavigationBar: true,
@@ -65,16 +62,12 @@ class HomeScreen extends ConsumerWidget {
                 ),
 
                 // Lista de productos
-                _buildProductList(products, screenWidth),
+                GridviewWidget(itemCount: 6, products: products),
               ],
             ),
           );
         },
       ),
     );
-  }
-
-  Widget _buildProductList(List<Product> products, double screenWidth) {
-    return GridviewWidget(itemCount: 6, products: products);
   }
 }

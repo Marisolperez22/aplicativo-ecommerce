@@ -1,10 +1,10 @@
+import 'package:atomic_design_system/atomic_design_system.dart';
+import 'package:atomic_design_system/widgets/product_card_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fake_store_get_request/models/product.dart';
-import 'package:atomic_design_system/atomic_design_system.dart';
 
-import '../../../../core/widgets/product_card_image.dart';
 import '../providers/cart_notifier.dart';
 
 class CardProduct extends ConsumerWidget {

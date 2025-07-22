@@ -1,3 +1,4 @@
+import 'package:atomic_design_system/widgets/error_message.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,7 +8,6 @@ import 'package:atomic_design_system/atoms/text_fields/custom_text_field.dart';
 
 import '../providers/auth_notifier.dart';
 import '../../../../core/utils/utils.dart';
-import '../../../../core/widgets/error_message.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});

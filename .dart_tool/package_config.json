@@ -27,7 +27,7 @@
     },
     {
       "name": "atomic_design_system",
-      "rootUri": "file:///Users/marisolperez/.pub-cache/git/atomic_desing_system-5e3d248b48acd2b93358bc33573fefc772f06550/atomic_design_system",
+      "rootUri": "file:///Users/marisolperez/.pub-cache/git/atomic_desing_system-8b706cd8eb48545945a15ad635d4202f1fa92075/atomic_design_system",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     },
@@ -632,7 +632,7 @@
       "languageVersion": "3.7"
     }
   ],
-  "generated": "2025-07-21T12:01:07.392562Z",
+  "generated": "2025-07-22T12:12:14.614816Z",
   "generator": "pub",
   "generatorVersion": "3.7.2",
   "flutterRoot": "file:///Users/marisolperez/Flutter/flutter",
