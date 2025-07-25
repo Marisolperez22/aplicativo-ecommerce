@@ -48,16 +48,16 @@ Muestra información de contacto de la tienda y las respuestas a las preguntas m
 
 
 ## Instrucciones de ejecución
-1. Clonar el repositorio
+1. Clonar el repositorio: 
    *git clone https://github.com/usuario/repositorio.git*
 
-2. Obtener dependencias
+2. Obtener dependencias: 
    *flutter pub get*
 
-3. Generar código con build_runner
+3. Generar código con build_runner: 
    *flutter pub run build_runner build --delete-conflicting-outputs*
 
-4. Ejecutar la aplicación en emulador/dispositivos:
+4. Ejecutar la aplicación en emulador/dispositivos: 
    *flutter run*
 
 ## Vista previa
