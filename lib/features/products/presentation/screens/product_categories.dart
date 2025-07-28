@@ -90,9 +90,11 @@ class ProductCategories extends ConsumerWidget {
                 if (products.isEmpty) {
                   return Empty();
                 }
-                return GridviewWidget(
-                  itemCount: products.length,
-                  products: products,
+                return SingleChildScrollView(
+                  child: GridviewWidget(
+                    itemCount: products.length,
+                    products: products,
+                  ),
                 );
               },
             ),
