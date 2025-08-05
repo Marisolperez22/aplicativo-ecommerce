@@ -1,4 +1,4 @@
-abstract class Failure {
+class Failure {
   final String? title;
   final int? codeError;
   final String? message;
@@ -7,7 +7,7 @@ abstract class Failure {
 }
 
 ///When the response status is different than 200
-class ServerFailure extends Failure {
+/* class ServerFailure extends Failure {
   const ServerFailure(this.statusCode) : super();
 
   final int statusCode;
@@ -41,3 +41,4 @@ class AuthFailure extends Failure {
 class BadRequest extends Failure {
   const BadRequest({super.title, super.message, super.codeError});
 }
+ */

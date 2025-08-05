@@ -37,29 +37,28 @@ class Utils {
   }
 
   static Either<Failure, T> handleException<T>(dynamic e) {
-    if (e is BaseClientException) {
-      if (e.type == 'TimeoutException') {
-        return const Left(TimeOutFailure());
-      }
-      if (e.type == 'UnAuthorization') {
-        return const Left(AuthFailure());
-      }
-      if (e.type == 'BadRequest') {
-        return Left(
-          BadRequest(
-            title: e.title,
-            message: e.message,
-            codeError: e.codeError,
-          ),
-        );
-      }
-      return const Left(AnotherFailure());
-    } else {
-      return const Left(AnotherFailure());
+    return Left(
+      Failure(
+        message: e.toString(),
+        codeError: e is BaseClientException ? _getStatusCode(e.type) : null,
+      ),
+    );
+  }
+
+  static int? _getStatusCode(String errorType) {
+    switch (errorType) {
+      case 'BadRequest':
+        return 400;
+      case 'Unauthorized':
+        return 401;
+      case 'NotFound':
+        return 404;
+      default:
+        return null;
     }
   }
 
-  static  double calculateTotal(List<CartItem> items) {
+  static double calculateTotal(List<CartItem> items) {
     return items.fold(0, (sum, item) => sum + item.totalPrice);
   }
 
@@ -78,7 +77,7 @@ class Utils {
         .join(' ');
   }
 
- static double calculateAspectRatio(double screenWidth) {
+  static double calculateAspectRatio(double screenWidth) {
     if (screenWidth > 1800) return 0.65;
     if (screenWidth > 1400) return 0.7;
     if (screenWidth > 1100) return 0.75;
