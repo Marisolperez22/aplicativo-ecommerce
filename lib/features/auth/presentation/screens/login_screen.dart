@@ -1,8 +1,8 @@
-import 'package:atomic_design_system/widgets/error_message.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:atomic_design_system/pages/login_page.dart';
+import 'package:atomic_design_system/widgets/error_message.dart';
 import 'package:atomic_design_system/atoms/buttons/primary_button.dart';
 import 'package:atomic_design_system/atoms/text_fields/custom_text_field.dart';
 
@@ -63,6 +63,7 @@ class _LoginPageState extends ConsumerState<LoginScreen> {
               children: [
                 Expanded(
                   child: PrimaryButton(
+                    key: const Key('LoginButton'),
                     text: 'Login',
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {

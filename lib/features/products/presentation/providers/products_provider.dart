@@ -1,9 +1,10 @@
+import 'package:fake_store_get_request/data/models/product.dart';
+
 import 'providers.dart';
 import 'package:either_dart/either.dart';
 import '../../../../core/errors/failure.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../domain/usecases/get_products_usecase.dart';
-import 'package:fake_store_get_request/models/product.dart';
 
 final productsProvider =
     FutureProvider.autoDispose<Either<Failure, List<Product>>>((ref) {

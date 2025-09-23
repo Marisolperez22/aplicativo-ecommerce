@@ -1,4 +1,4 @@
-import 'package:fake_store_get_request/models/product.dart';
+import 'package:fake_store_get_request/data/models/product.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/usecases/get_products_by_category_usecase.dart';

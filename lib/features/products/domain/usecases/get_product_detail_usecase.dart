@@ -1,5 +1,5 @@
 import 'package:either_dart/either.dart';
-import 'package:fake_store_get_request/models/product.dart';
+import 'package:fake_store_get_request/data/models/product.dart';
 
 import '../../../../core/errors/failure.dart';
 import '../repositories/product_repository.dart';

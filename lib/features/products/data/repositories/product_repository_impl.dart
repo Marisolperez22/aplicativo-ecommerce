@@ -1,7 +1,7 @@
 import 'package:either_dart/either.dart';
+import 'package:fake_store_get_request/data/models/cart.dart';
+import 'package:fake_store_get_request/data/models/product.dart';
 import 'package:injectable/injectable.dart';
-import 'package:fake_store_get_request/models/cart.dart';
-import 'package:fake_store_get_request/models/product.dart';
 
 import '../../../../core/utils/utils.dart';
 import '../../../../core/errors/failure.dart';
@@ -59,7 +59,7 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   @override
-  Future<Either<Failure, List<Cart>>> getUserCart(int idUser) async {
+  Future<Either<Failure, Cart>> getUserCart(int idUser) async {
     try {
       final cart = await _productsDatasources.getUserCart(idUser);
       return Right(cart);

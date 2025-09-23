@@ -1,4 +1,4 @@
-import 'package:fake_store_get_request/models/product.dart';
+import 'package:fake_store_get_request/data/models/product.dart';
 
 class CartItem {
   final Product product;

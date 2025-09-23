@@ -1,7 +1,9 @@
+import 'package:fake_store_get_request/data/models/product.dart';
+import 'package:fake_store_get_request/services/fake_store_service.dart';
+
 import 'products_by_category.dart';
 import 'package:either_dart/either.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fake_store_get_request/models/product.dart';
 
 import '../../../../core/errors/failure.dart';
 import '../../data/datasources/products_datasource.dart';
@@ -15,7 +17,7 @@ import '../../domain/usecases/get_products_by_category_usecase.dart';
 
 // Datasources
 final productsDatasourceProvider = Provider<IProductsDatasource>((ref) {
-  return ProductsDatasource();
+  return ProductsDatasource(remoteDataSource: FakeStoreService());
 });
 
 // Repositories

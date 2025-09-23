@@ -1,5 +1,5 @@
 import 'package:either_dart/either.dart';
-import 'package:fake_store_get_request/models/cart.dart';
+import 'package:fake_store_get_request/data/models/cart.dart';
 
 import '../../../../core/errors/failure.dart';
 import '../repositories/product_repository.dart';
@@ -9,7 +9,7 @@ class GetUserCartUsecase {
 
   GetUserCartUsecase(this.repository);
 
-  Future<Either<Failure, List<Cart>>> call(int idUser) async {
+  Future<Either<Failure, Cart>> call(int idUser) async {
     return await repository.getUserCart(idUser);
   }
 }

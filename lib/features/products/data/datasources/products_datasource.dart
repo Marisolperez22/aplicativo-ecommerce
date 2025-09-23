@@ -1,19 +1,21 @@
-import 'package:fake_store_get_request/models/cart.dart';
+import 'package:fake_store_get_request/data/models/cart.dart';
+import 'package:fake_store_get_request/data/models/product.dart';
+import 'package:fake_store_get_request/services/fake_store_service.dart';
 import 'package:injectable/injectable.dart';
-
-import 'package:fake_store_get_request/fake_store_get_request.dart';
 
 abstract class IProductsDatasource {
   Future<List<Product>> getProducts();
   Future<List<String>> getCategories();
-  Future<List<Cart>> getUserCart(int idUser);
+  Future<Cart> getUserCart(int idUser);
   Future<Product> getProductDetail(int productId);
   Future<List<Product>> getProductsByCategory(String category);
 }
 
 @Injectable(as: IProductsDatasource)
 class ProductsDatasource implements IProductsDatasource {
-  final remoteDataSource = FakeStoreService();
+  final FakeStoreService remoteDataSource;
+
+  ProductsDatasource({required this.remoteDataSource});
 
   @override
   Future<List<Product>> getProducts() async {
@@ -32,11 +34,11 @@ class ProductsDatasource implements IProductsDatasource {
 
   @override
   Future<List<Product>> getProductsByCategory(String category) async {
-    return await remoteDataSource.getProductByCategory(category);
+    return await remoteDataSource.getProductsByCategory(category);
   }
 
   @override
-  Future<List<Cart>> getUserCart(int idUser) async {
+  Future<Cart> getUserCart(int idUser) async {
     return await remoteDataSource.getUserCart(idUser);
   }
 }

@@ -5,7 +5,6 @@ import 'package:ecommerce/features/products/presentation/screens/cart_screen.dar
 import 'package:ecommerce/features/products/presentation/screens/search_screen.dart';
 
 import '../../features/auth/presentation/screens/login_screen.dart';
-import '../../features/auth/presentation/screens/register_page.dart';
 import '../../features/auth/presentation/providers/auth_notifier.dart';
 import '../../features/products/presentation/screens/home_screen.dart';
 import '../../features/products/presentation/screens/support_screen.dart';
@@ -72,11 +71,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         name: 'cart',
         builder: (context, state) => const CartScreen(),
       ),
-      GoRoute(
-        path: '/register',
-        name: 'register',
-        builder: (context, state) => const RegisterPage(),
-      ),
+      // GoRoute(
+      //   path: '/register',
+      //   name: 'register',
+      //   builder: (context, state) => const RegisterPage(),
+      // ),
 
       GoRoute(
         path: '/support',

@@ -1,12 +1,15 @@
+import 'package:fake_store_get_request/data/models/login_response.dart';
+import 'package:fake_store_get_request/services/fake_store_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fake_store_get_request/models/login_response.dart';
 
 import '../../data/repositories/auth_repository_impl.dart';
 import '../../domain/repositories/auth_repository.dart';
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
-  return AuthRepositoryImpl();
+  return AuthRepositoryImpl(
+    remoteDataSource: FakeStoreService(),
+  );
 });
 
 final authNotifierProvider = StateNotifierProvider<AuthNotifier, AuthState>((

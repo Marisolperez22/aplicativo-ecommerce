@@ -10,11 +10,11 @@
 		</data>
 		<key>flutter_assets/AssetManifest.bin</key>
 		<data>
-		N7Z9mVJvqx55XMrfl9MwMJqdNT4=
+		MIH9K8fwXbLOHA1ZVmPB8jBycQE=
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		+0njy3V1dMZPA5fFnIuNxG1S2oU=
+		qz7abDX+WM8sqVurDJ/jFNeUSVU=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>flutter_assets/NOTICES.Z</key>
 		<data>
-		qDGzjG1t8R8DQfdVXqtFEZy0ezM=
+		5y9yOBvVb12SsfIb2kQ2V3eEMM0=
 		</data>
 		<key>flutter_assets/NativeAssetsManifest.json</key>
 		<data>
@@ -32,17 +32,21 @@
 		<data>
 		uVQOtl794g/16knXwEhAeVsMwV8=
 		</data>
+		<key>flutter_assets/assets/images/show_app.gif</key>
+		<data>
+		aMptlYKzGiuZujUIrXjV733SvJM=
+		</data>
 		<key>flutter_assets/fonts/MaterialIcons-Regular.otf</key>
 		<data>
 		/CUoTuPQqqdexfyOT9lpJhV+2MQ=
 		</data>
 		<key>flutter_assets/isolate_snapshot_data</key>
 		<data>
-		gRDbYzMNgtJeT9rLZDdiOJ0RXMg=
+		w9WcwIYVRl07EMLuLi7qukruhIs=
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		DVPISk+Qnm+X1VXjspfYOZnFJ9Q=
+		SJ0e2TNkOiqJC5gR8eIp3b9cU7U=
 		</data>
 		<key>flutter_assets/packages/atomic_design_system/assets/fonts/Montserrat-Bold.ttf</key>
 		<data>
@@ -58,11 +62,11 @@
 		</data>
 		<key>flutter_assets/shaders/ink_sparkle.frag</key>
 		<data>
-		VoVnsu58hN7wrwazX0nyAopiB0Q=
+		VvTF10G1gIeea4aI0DhJjCjHgXQ=
 		</data>
 		<key>flutter_assets/vm_snapshot_data</key>
 		<data>
-		6f33nJbLQOxwLNQ7Pq7TZR9ENuo=
+		SoHnDHqzNKozN7o/zhsvOoXVErY=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -71,14 +75,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			U894Zjuv91Ts8++8vSFoSWpgFTk1iSXqx9jq0lHJ7wU=
+			PuBRodPGP8bkC1JW3dIlMXVLe2bowopc8JP4Sm8tJO0=
 			</data>
 		</dict>
 		<key>flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			eup9omTvlPUFJs705QHCugPGQKSoy5C3MhnjQOG5Iqg=
+			fKz2MVz6Uf0Cj+IBy0aStQSyxPnNYJvxZSf5bjodZfc=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -92,7 +96,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Jm5M1wJMdwrQz0ikfEoKkUXc4Yd+sydEb+1DC89uOzo=
+			CQFrK+fi925xubKvYDJgUKHhgEb7vegOnIKIi9DEfiQ=
 			</data>
 		</dict>
 		<key>flutter_assets/NativeAssetsManifest.json</key>
@@ -109,6 +113,13 @@
 			c4Zw6AoXnwaF5W8D0Jp7kLB5t8oPiks5G+m876VSZQc=
 			</data>
 		</dict>
+		<key>flutter_assets/assets/images/show_app.gif</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			/Y2yFQKK3L5er3ZtHZuMjl8hTyZtkMM0zo90PJcPP3o=
+			</data>
+		</dict>
 		<key>flutter_assets/fonts/MaterialIcons-Regular.otf</key>
 		<dict>
 			<key>hash2</key>
@@ -120,14 +131,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Ut/uEhc6+hUf6S/IpyxQydpXSJV0AmyYEkKu13s4D6o=
+			PBOAqqWi5ujK3/k/uWcKrZyOam5QktQ5MqxZKes8MBY=
 			</data>
 		</dict>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			htzXJHd+0fM4ZZzNyQQXbJ+E777skALhLlEmtiWW1aw=
+			q5coKi9DAjGwCOFL7Wd3J4iSPcuqllTzBu2iQm1glBA=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/atomic_design_system/assets/fonts/Montserrat-Bold.ttf</key>
@@ -155,14 +166,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			4PC1vOWKHlNOnW4dGwFfD4TPwBCllniPCsOy7+1X5co=
+			TGVjYgE+Oyl6guvhhPPrWfynkxkJeFjSzSLsQqn7Q3M=
 			</data>
 		</dict>
 		<key>flutter_assets/vm_snapshot_data</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			EkAQI7At/OAUaTSQUy3t6/4PpHWrvbPs+YdJHmzJ978=
+			RTqty/gYjcrXxgR3QLjNukvL8gGpfV6MdaYktQJaIa8=
 			</data>
 		</dict>
 	</dict>
