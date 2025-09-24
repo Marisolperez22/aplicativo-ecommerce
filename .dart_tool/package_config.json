@@ -165,7 +165,7 @@
     },
     {
       "name": "flutter",
-      "rootUri": "file:///Users/marisolperez/Flutter/flutter/packages/flutter",
+      "rootUri": "file:///Users/marisolperez/fvm/versions/3.32.7/packages/flutter",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     },
@@ -189,13 +189,13 @@
     },
     {
       "name": "flutter_test",
-      "rootUri": "file:///Users/marisolperez/Flutter/flutter/packages/flutter_test",
+      "rootUri": "file:///Users/marisolperez/fvm/versions/3.32.7/packages/flutter_test",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     },
     {
       "name": "flutter_web_plugins",
-      "rootUri": "file:///Users/marisolperez/Flutter/flutter/packages/flutter_web_plugins",
+      "rootUri": "file:///Users/marisolperez/fvm/versions/3.32.7/packages/flutter_web_plugins",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     },
@@ -338,6 +338,12 @@
       "languageVersion": "3.7"
     },
     {
+      "name": "network_image_mock",
+      "rootUri": "file:///Users/marisolperez/.pub-cache/hosted/pub.dev/network_image_mock-2.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "package_config",
       "rootUri": "file:///Users/marisolperez/.pub-cache/hosted/pub.dev/package_config-2.2.0",
       "packageUri": "lib/",
@@ -471,7 +477,7 @@
     },
     {
       "name": "sky_engine",
-      "rootUri": "file:///Users/marisolperez/Flutter/flutter/bin/cache/pkg/sky_engine",
+      "rootUri": "file:///Users/marisolperez/fvm/versions/3.32.7/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     },
@@ -616,7 +622,7 @@
   ],
   "generator": "pub",
   "generatorVersion": "3.8.1",
-  "flutterRoot": "file:///Users/marisolperez/Flutter/flutter",
-  "flutterVersion": "3.32.8",
+  "flutterRoot": "file:///Users/marisolperez/fvm/versions/3.32.7",
+  "flutterVersion": "3.32.7",
   "pubCache": "file:///Users/marisolperez/.pub-cache"
 }
