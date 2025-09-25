@@ -1,11 +1,10 @@
 import 'package:ecommerce/features/products/presentation/providers/products_by_category.dart';
 import 'package:ecommerce/features/products/presentation/providers/providers.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:atomic_design_system/widgets/empty.dart';
-import 'package:fake_store_get_request/data/models/product.dart';
 import 'package:ecommerce/features/products/presentation/screens/product_categories.dart';
+import 'package:fake_store_get_request/data/models/product.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 Widget createTestWidget({
   required Widget child,
@@ -17,7 +16,6 @@ Widget createTestWidget({
     overrides: [
       if (categoriesAsync != null)
         categoriesProvider.overrideWith((ref) async {
-          // categoriesProvider es un FutureProvider<List<String>>
           return categoriesAsync.when(
             data: (data) => data,
             loading: () => Future.value([]),
@@ -38,11 +36,8 @@ Widget createTestWidget({
   );
 }
 
-void main() {
-   
-
-      group('ProductCategories widget tests', () {
-         testWidgets('Muestra loading en categorías y productos', (tester) async {
+void main(){
+ testWidgets('Muestra loading en categorías y productos', (tester) async {
       await tester.pumpWidget(
         createTestWidget(
           child: const ProductCategories(),
@@ -53,48 +48,28 @@ void main() {
 
       expect(find.byType(CircularProgressIndicator), findsNWidgets(2));
     });
-        // testWidgets('Renderiza chips de categorías y cambia selección', (
-        //   tester,
-        // ) async {
-        //   await tester.pumpWidget(
-        //     createTestWidget(
-        //       child: const ProductCategories(),
-        //       categoriesAsync: const AsyncData(['Electrónica', 'Ropa']),
-        //       selectedCategory: 'Todas',
-        //       productsAsync: const AsyncData([]),
-        //     ),
-        //   );
 
-        //   await tester.pumpAndSettle();
+     testWidgets('Renderiza chips de categorías y cambia selección', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        createTestWidget(
+          child: const ProductCategories(),
+          categoriesAsync: const AsyncData(['Electrónica', 'Ropa']),
+          selectedCategory: 'Todas',
+          productsAsync: const AsyncData([]),
+        ),
+      );
 
-        //   expect(find.text('Todas'), findsOneWidget);
-        //   expect(find.text('Electrónica'), findsOneWidget);
+      await tester.pumpAndSettle();
 
-        //   await tester.tap(find.text('Ropa'));
-        //   await tester.pumpAndSettle();
+      expect(find.text('Todas'), findsOneWidget);
+      expect(find.text('Electrónica'), findsOneWidget);
 
-        //   expect(find.text('Ropa'), findsWidgets);
-        // });
+      await tester.tap(find.text('Ropa'));
+      await tester.pumpAndSettle();
 
-        // testWidgets('Renderiza productos de la categoría', (tester) async {
-        //   final mockProducts = [
-        //     Product(id: 1, title: 'Zapatos', image: '', price: 50.0),
-        //     Product(id: 2, title: 'Camisa', image: '', price: 30.0),
-        //   ];
+      expect(find.text('Ropa'), findsWidgets);
+    });
 
-        //   await tester.pumpWidget(
-        //     createTestWidget(
-        //       child: const ProductCategories(),
-        //       categoriesAsync: const AsyncData(['Zapatos', 'Ropa']),
-        //       selectedCategory: 'Zapatos',
-        //       productsAsync: AsyncData(mockProducts),
-        //     ),
-        //   );
-
-        //   await tester.pumpAndSettle();
-
-        //   expect(find.text('Zapatos'), findsOneWidget);
-        //   expect(find.text('Camisa'), findsOneWidget);
-        // });
-      });
 }
