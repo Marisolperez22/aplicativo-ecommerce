@@ -30,7 +30,6 @@ class ProductCategories extends ConsumerWidget {
       appBar: GenericAppBar(title: 'Categorías'),
       body: Column(
         children: [
-          /// Categories Filter Chips
           SizedBox(
             height: isLargeScreen ? 90 : 50,
             child: categoriesAsync.when(
