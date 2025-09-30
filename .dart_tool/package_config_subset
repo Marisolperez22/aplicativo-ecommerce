@@ -254,6 +254,10 @@ pool
 3.4
 file:///Users/marisolperez/.pub-cache/hosted/pub.dev/pool-1.5.2/
 file:///Users/marisolperez/.pub-cache/hosted/pub.dev/pool-1.5.2/lib/
+process
+3.3
+file:///Users/marisolperez/.pub-cache/hosted/pub.dev/process-5.0.3/
+file:///Users/marisolperez/.pub-cache/hosted/pub.dev/process-5.0.3/lib/
 pub_semver
 3.4
 file:///Users/marisolperez/.pub-cache/hosted/pub.dev/pub_semver-2.2.0/
@@ -330,6 +334,10 @@ string_scanner
 3.1
 file:///Users/marisolperez/.pub-cache/hosted/pub.dev/string_scanner-1.4.1/
 file:///Users/marisolperez/.pub-cache/hosted/pub.dev/string_scanner-1.4.1/lib/
+sync_http
+2.12
+file:///Users/marisolperez/.pub-cache/hosted/pub.dev/sync_http-0.3.1/
+file:///Users/marisolperez/.pub-cache/hosted/pub.dev/sync_http-0.3.1/lib/
 term_glyph
 3.1
 file:///Users/marisolperez/.pub-cache/hosted/pub.dev/term_glyph-1.2.2/
@@ -378,6 +386,10 @@ web_socket_channel
 3.3
 file:///Users/marisolperez/.pub-cache/hosted/pub.dev/web_socket_channel-3.0.3/
 file:///Users/marisolperez/.pub-cache/hosted/pub.dev/web_socket_channel-3.0.3/lib/
+webdriver
+3.1
+file:///Users/marisolperez/.pub-cache/hosted/pub.dev/webdriver-3.1.0/
+file:///Users/marisolperez/.pub-cache/hosted/pub.dev/webdriver-3.1.0/lib/
 xdg_directories
 3.3
 file:///Users/marisolperez/.pub-cache/hosted/pub.dev/xdg_directories-1.1.0/
@@ -402,6 +414,10 @@ flutter
 3.7
 file:///Users/marisolperez/fvm/versions/3.32.7/packages/flutter/
 file:///Users/marisolperez/fvm/versions/3.32.7/packages/flutter/lib/
+flutter_driver
+3.7
+file:///Users/marisolperez/fvm/versions/3.32.7/packages/flutter_driver/
+file:///Users/marisolperez/fvm/versions/3.32.7/packages/flutter_driver/lib/
 flutter_test
 3.7
 file:///Users/marisolperez/fvm/versions/3.32.7/packages/flutter_test/
@@ -410,4 +426,12 @@ flutter_web_plugins
 3.7
 file:///Users/marisolperez/fvm/versions/3.32.7/packages/flutter_web_plugins/
 file:///Users/marisolperez/fvm/versions/3.32.7/packages/flutter_web_plugins/lib/
+fuchsia_remote_debug_protocol
+3.7
+file:///Users/marisolperez/fvm/versions/3.32.7/packages/fuchsia_remote_debug_protocol/
+file:///Users/marisolperez/fvm/versions/3.32.7/packages/fuchsia_remote_debug_protocol/lib/
+integration_test
+3.7
+file:///Users/marisolperez/fvm/versions/3.32.7/packages/integration_test/
+file:///Users/marisolperez/fvm/versions/3.32.7/packages/integration_test/lib/
 2
