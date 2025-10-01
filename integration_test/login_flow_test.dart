@@ -6,23 +6,19 @@ import 'package:integration_test/integration_test.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  group('🔐 Login Screen', () {
+  group('Login Screen', () {
     testWidgets('Login exitoso redirige al Home', (tester) async {
       app.main();
       await tester.pumpAndSettle();
 
-      // Pantalla Login
       expect(find.text('Login'), findsAny);
 
-      // Completar formulario
-      await tester.enterText(find.byType(TextFormField).first, 'user');
-      await tester.enterText(find.byType(TextFormField).last, '1234');
+      await tester.enterText(find.byKey(const Key('UserName')), 'mor_2314');
+      await tester.enterText(find.byKey(const Key('Password')).last, '83r5^_');
 
-      // Tap en botón Login
       await tester.tap(find.byKey(const Key('LoginButton')));
-      await tester.pumpAndSettle();
+      await tester.pumpAndSettle(const Duration(seconds: 3));
 
-      // Validar navegación al Home
       expect(find.text('Fake Store'), findsOneWidget);
     });
 
@@ -30,12 +26,10 @@ void main() {
       app.main();
       await tester.pumpAndSettle();
 
-      // Tap sin llenar campos
       await tester.tap(find.byKey(const Key('LoginButton')));
       await tester.pumpAndSettle();
 
-      // Debe mostrar mensajes de error
-      expect(find.textContaining('obligatorio'), findsWidgets);
+      expect(find.textContaining('Por favor ingrese un valor'), findsWidgets);
     });
   });
 }

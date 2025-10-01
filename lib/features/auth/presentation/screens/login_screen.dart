@@ -28,78 +28,80 @@ class _LoginPageState extends ConsumerState<LoginScreen> {
     super.dispose();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final authState = ref.watch(authNotifierProvider);
+ @override
+Widget build(BuildContext context) {
+  ref.listen(authNotifierProvider, (previous, next) {
+    if (next is AuthAuthenticated) {
+      if (context.mounted) {
+        context.goNamed('home');
+      }
+    }
+  });
 
-    return LoginPage(
-      form: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            const Text(
-              'Login',
-              style: TextStyle(fontSize: 36, fontWeight: FontWeight.w700),
-            ),
-            const SizedBox(height: 40),
-            CustomTextField(
-              label: 'Nombre de usuario',
-              controller: emailController,
-              validator: (email) => Utils.validateInput(email),
-              hasSuffixIcon: false,
-            ),
-            const SizedBox(height: 20),
+  final authState = ref.watch(authNotifierProvider);
 
-            CustomTextField(
-              label: 'Contraseña',
-              controller: passwordController,
-              validator: (password) => Utils.validateInput(password),
-              hasSuffixIcon: true,
-            ),
-            if (authState is AuthError)
-              ErrorMessage(message: authState.message),
-            const SizedBox(height: 40),
-            Row(
-              children: [
-                Expanded(
-                  child: PrimaryButton(
-                    key: const Key('LoginButton'),
-                    text: 'Login',
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        ref
-                            .read(authNotifierProvider.notifier)
-                            .login(
-                              emailController.text,
-                              passwordController.text,
-                            );
-                      }
+  return LoginPage(
+    form: Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          const Text('Login', style: TextStyle(fontSize: 36, fontWeight: FontWeight.w700)),
+          const SizedBox(height: 40),
 
-                      if (ref.read(authNotifierProvider) is AuthAuthenticated) {
-                        if (context.mounted) {
-                          context.goNamed('home');
-                        }
-                      }
-                    },
-                  ),
+          CustomTextField(
+            key: const Key('UserName'),
+            label: 'Nombre de usuario',
+            controller: emailController,
+            validator: (email) => Utils.validateInput(email),
+            hasSuffixIcon: false,
+          ),
+          const SizedBox(height: 20),
+
+          CustomTextField(
+            label: 'Contraseña',
+            key: const Key('Password'),
+            controller: passwordController,
+            validator: (password) => Utils.validateInput(password),
+            hasSuffixIcon: true,
+          ),
+          if (authState is AuthError)
+            ErrorMessage(message: authState.message),
+
+          const SizedBox(height: 40),
+          Row(
+            children: [
+              Expanded(
+                child: PrimaryButton(
+                  key: const Key('LoginButton'),
+                  text: 'Login',
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      ref.read(authNotifierProvider.notifier).login(
+                            emailController.text,
+                            passwordController.text,
+                          );
+                    }
+                  },
                 ),
-              ],
-            ),
-            SizedBox(height: 20),
+              ),
+            ],
+          ),
 
-            Row(
-              children: [
-                Expanded(
-                  child: PrimaryButton(
-                    text: 'Registrarse',
-                    onPressed: () => context.pushNamed('register'),
-                  ),
+          const SizedBox(height: 20),
+          Row(
+            children: [
+              Expanded(
+                child: PrimaryButton(
+                  text: 'Registrarse',
+                  onPressed: () => context.pushNamed('register'),
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+        ],
       ),
-    );
-  }
+    ),
+  );
+}
+
 }
